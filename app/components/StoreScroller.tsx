@@ -1,6 +1,7 @@
 "use client";
+
 import React from 'react';
-import AlSaveItem from './AlSaveItem'; // Adjust the path if necessary
+import AlSaveItem from './AlSaveItem'; // Adjust the path if needed
 
 interface AlSaveItemProps {
   name: string;
@@ -29,7 +30,7 @@ export default function StoreScroller({ place, specials }: StoreScrollerProps) {
             <AlSaveItem
               name={special.name}
               type={special.type}
-              place={special.place}  // Pass the place to AlSaveItem
+              place={special.place}
               foodorgroc={special.foodorgroc}
               from={special.from}
               till={special.till}
