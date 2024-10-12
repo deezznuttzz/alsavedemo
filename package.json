@@ -7,13 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-
-
     "vercel-build": "npm install prisma @prisma/client && prisma generate && next build",
     "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",
+    "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
@@ -36,11 +35,9 @@
     "@types/web-push": "^3.6.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
-    "postcss": "^8",
+    "postcss": "^8.4.47",
     "prisma": "^5.20.0",
-    "tailwindcss": "^3.4.1",
+    "tailwindcss": "^3.4.13",
     "typescript": "^5"
   }
-  
 }
-
