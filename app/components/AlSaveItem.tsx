@@ -1,12 +1,11 @@
-// AlSaveItem.tsx
 "use client";
 import React from 'react';
+import Image from 'next/image'; // Use optimized image component
 
-// Define the props interface for AlSaveItem
 interface AlSaveItemProps {
-  name: string;       // Special name
+  name: string;
   type: string;
-  place: string;      // Store name
+  place: string;
   foodorgroc: string;
   from: string;
   till: string;
@@ -18,7 +17,7 @@ interface AlSaveItemProps {
 const AlSaveItem: React.FC<AlSaveItemProps> = ({
   name,
   type,
-  place,  // Ensure this is accepted as a prop
+  place,
   foodorgroc,
   from,
   till,
@@ -28,10 +27,11 @@ const AlSaveItem: React.FC<AlSaveItemProps> = ({
 }) => {
   return (
     <div className="card">
-      <img src={imagepath} alt={name} />
+      <Image src={imagepath} alt={name} width={300} height={300} />
       <h3>{name}</h3>
       <p>Type: {type}</p>
-      <p>Store: {place}</p> {/* Make sure 'place' is used here */}
+      <p>Category: {foodorgroc}</p> {/* Ensuring it's used */}
+      <p>Store: {place}</p>
       <p>From: {from}</p>
       <p>Till: {till}</p>
       <p>Price before: ${before}</p>

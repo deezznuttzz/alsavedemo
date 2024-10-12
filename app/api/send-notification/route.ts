@@ -18,11 +18,7 @@ export async function POST(req: Request) {
 
     const user = await prisma.user.findUnique({
       where: { id: Number(userId) },
-      select: {
-        id: true,
-        name: true,
-        subscription: true,
-      },
+      select: { id: true, name: true, subscription: true },
     });
 
     if (!user) {
@@ -36,15 +32,12 @@ export async function POST(req: Request) {
     let subscription;
     try {
       subscription = JSON.parse(user.subscription as unknown as string);
-    } catch (parseError) {
+    } catch {
       console.error('Failed to parse subscription:', user.subscription);
       return NextResponse.json({ error: 'Invalid subscription data' }, { status: 400 });
     }
 
-    const payload = JSON.stringify({
-      title: 'Special Offers!',
-      message,
-    });
+    const payload = JSON.stringify({ title: 'Special Offers!', message });
 
     await webpush.sendNotification(subscription, payload);
 
