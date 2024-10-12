@@ -1,7 +1,7 @@
 // app/api/auth/login/route.ts
-import { prisma } from '@/lib/prisma';
+import { prisma } from '../../../../lib/prisma';
 import { NextResponse } from 'next/server';
-import { signAccessToken, signRefreshToken } from '@/lib/auth';
+import { signAccessToken, signRefreshToken } from '../../../../lib/auth';
 import bcrypt from 'bcrypt';
 
 export async function POST(req: Request) {

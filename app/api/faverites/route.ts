@@ -1,7 +1,7 @@
 // app/api/favorites/route.ts
 
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/prisma'; // Adjust the import according to your project structure
+import { prisma } from '@/lib/prisma'; // Adjust the import according to your project structure
 
 // Handle GET requests
 export async function GET() {
