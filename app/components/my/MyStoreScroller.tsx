@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 
 interface MyAlSaveItemProps {
   name: string;
@@ -35,7 +36,7 @@ const MyAlSaveItem = ({
       <p>Valid Till: {till}</p>
       <p>Before Price: {before}</p>
       <p>After Price: {after}</p>
-      <img src={imagepath} alt={name} className="w-full h-auto mt-2" />
+      <Image src={imagepath} alt={name} className="w-full h-auto mt-2" />
     </div>
   );
 };
