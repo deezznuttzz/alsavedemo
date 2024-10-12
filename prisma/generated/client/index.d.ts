@@ -1163,15 +1163,15 @@ export namespace Prisma {
    */
 
   export type FavFoodCountOutputType = {
+    favtype: number
     favfoodname: number
     favplacename: number
-    favtype: number
   }
 
   export type FavFoodCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    favtype?: boolean | FavFoodCountOutputTypeCountFavtypeArgs
     favfoodname?: boolean | FavFoodCountOutputTypeCountFavfoodnameArgs
     favplacename?: boolean | FavFoodCountOutputTypeCountFavplacenameArgs
-    favtype?: boolean | FavFoodCountOutputTypeCountFavtypeArgs
   }
 
   // Custom InputTypes
@@ -1188,6 +1188,13 @@ export namespace Prisma {
   /**
    * FavFoodCountOutputType without action
    */
+  export type FavFoodCountOutputTypeCountFavtypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SpecialWhereInput
+  }
+
+  /**
+   * FavFoodCountOutputType without action
+   */
   export type FavFoodCountOutputTypeCountFavfoodnameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SpecialWhereInput
   }
@@ -1199,26 +1206,19 @@ export namespace Prisma {
     where?: SpecialWhereInput
   }
 
-  /**
-   * FavFoodCountOutputType without action
-   */
-  export type FavFoodCountOutputTypeCountFavtypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SpecialWhereInput
-  }
-
 
   /**
    * Count Type PlacesCountOutputType
    */
 
   export type PlacesCountOutputType = {
-    specialsById: number
     specialsByName: number
+    specialsById: number
   }
 
   export type PlacesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    specialsById?: boolean | PlacesCountOutputTypeCountSpecialsByIdArgs
     specialsByName?: boolean | PlacesCountOutputTypeCountSpecialsByNameArgs
+    specialsById?: boolean | PlacesCountOutputTypeCountSpecialsByIdArgs
   }
 
   // Custom InputTypes
@@ -1235,14 +1235,14 @@ export namespace Prisma {
   /**
    * PlacesCountOutputType without action
    */
-  export type PlacesCountOutputTypeCountSpecialsByIdArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PlacesCountOutputTypeCountSpecialsByNameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SpecialWhereInput
   }
 
   /**
    * PlacesCountOutputType without action
    */
-  export type PlacesCountOutputTypeCountSpecialsByNameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PlacesCountOutputTypeCountSpecialsByIdArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SpecialWhereInput
   }
 
@@ -1252,15 +1252,15 @@ export namespace Prisma {
    */
 
   export type SpecialCountOutputType = {
+    favtype: number
     favfoodname: number
     favplacename: number
-    favtype: number
   }
 
   export type SpecialCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    favtype?: boolean | SpecialCountOutputTypeCountFavtypeArgs
     favfoodname?: boolean | SpecialCountOutputTypeCountFavfoodnameArgs
     favplacename?: boolean | SpecialCountOutputTypeCountFavplacenameArgs
-    favtype?: boolean | SpecialCountOutputTypeCountFavtypeArgs
   }
 
   // Custom InputTypes
@@ -1277,6 +1277,13 @@ export namespace Prisma {
   /**
    * SpecialCountOutputType without action
    */
+  export type SpecialCountOutputTypeCountFavtypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FavFoodWhereInput
+  }
+
+  /**
+   * SpecialCountOutputType without action
+   */
   export type SpecialCountOutputTypeCountFavfoodnameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FavFoodWhereInput
   }
@@ -1285,13 +1292,6 @@ export namespace Prisma {
    * SpecialCountOutputType without action
    */
   export type SpecialCountOutputTypeCountFavplacenameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: FavFoodWhereInput
-  }
-
-  /**
-   * SpecialCountOutputType without action
-   */
-  export type SpecialCountOutputTypeCountFavtypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FavFoodWhereInput
   }
 
@@ -2529,9 +2529,9 @@ export namespace Prisma {
     ffoodtype?: boolean
     notified?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    favtype?: boolean | FavFood$favtypeArgs<ExtArgs>
     favfoodname?: boolean | FavFood$favfoodnameArgs<ExtArgs>
     favplacename?: boolean | FavFood$favplacenameArgs<ExtArgs>
-    favtype?: boolean | FavFood$favtypeArgs<ExtArgs>
     _count?: boolean | FavFoodCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["favFood"]>
 
@@ -2560,9 +2560,9 @@ export namespace Prisma {
 
   export type FavFoodInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    favtype?: boolean | FavFood$favtypeArgs<ExtArgs>
     favfoodname?: boolean | FavFood$favfoodnameArgs<ExtArgs>
     favplacename?: boolean | FavFood$favplacenameArgs<ExtArgs>
-    favtype?: boolean | FavFood$favtypeArgs<ExtArgs>
     _count?: boolean | FavFoodCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FavFoodIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2573,9 +2573,9 @@ export namespace Prisma {
     name: "FavFood"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      favtype: Prisma.$SpecialPayload<ExtArgs>[]
       favfoodname: Prisma.$SpecialPayload<ExtArgs>[]
       favplacename: Prisma.$SpecialPayload<ExtArgs>[]
-      favtype: Prisma.$SpecialPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2951,9 +2951,9 @@ export namespace Prisma {
   export interface Prisma__FavFoodClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    favtype<T extends FavFood$favtypeArgs<ExtArgs> = {}>(args?: Subset<T, FavFood$favtypeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SpecialPayload<ExtArgs>, T, "findMany"> | Null>
     favfoodname<T extends FavFood$favfoodnameArgs<ExtArgs> = {}>(args?: Subset<T, FavFood$favfoodnameArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SpecialPayload<ExtArgs>, T, "findMany"> | Null>
     favplacename<T extends FavFood$favplacenameArgs<ExtArgs> = {}>(args?: Subset<T, FavFood$favplacenameArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SpecialPayload<ExtArgs>, T, "findMany"> | Null>
-    favtype<T extends FavFood$favtypeArgs<ExtArgs> = {}>(args?: Subset<T, FavFood$favtypeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SpecialPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3309,6 +3309,26 @@ export namespace Prisma {
   }
 
   /**
+   * FavFood.favtype
+   */
+  export type FavFood$favtypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Special
+     */
+    select?: SpecialSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SpecialInclude<ExtArgs> | null
+    where?: SpecialWhereInput
+    orderBy?: SpecialOrderByWithRelationInput | SpecialOrderByWithRelationInput[]
+    cursor?: SpecialWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SpecialScalarFieldEnum | SpecialScalarFieldEnum[]
+  }
+
+  /**
    * FavFood.favfoodname
    */
   export type FavFood$favfoodnameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3332,26 +3352,6 @@ export namespace Prisma {
    * FavFood.favplacename
    */
   export type FavFood$favplacenameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Special
-     */
-    select?: SpecialSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SpecialInclude<ExtArgs> | null
-    where?: SpecialWhereInput
-    orderBy?: SpecialOrderByWithRelationInput | SpecialOrderByWithRelationInput[]
-    cursor?: SpecialWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SpecialScalarFieldEnum | SpecialScalarFieldEnum[]
-  }
-
-  /**
-   * FavFood.favtype
-   */
-  export type FavFood$favtypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Special
      */
@@ -3581,8 +3581,8 @@ export namespace Prisma {
     location?: boolean
     type?: boolean
     imagepath?: boolean
-    specialsById?: boolean | Places$specialsByIdArgs<ExtArgs>
     specialsByName?: boolean | Places$specialsByNameArgs<ExtArgs>
+    specialsById?: boolean | Places$specialsByIdArgs<ExtArgs>
     _count?: boolean | PlacesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["places"]>
 
@@ -3603,8 +3603,8 @@ export namespace Prisma {
   }
 
   export type PlacesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    specialsById?: boolean | Places$specialsByIdArgs<ExtArgs>
     specialsByName?: boolean | Places$specialsByNameArgs<ExtArgs>
+    specialsById?: boolean | Places$specialsByIdArgs<ExtArgs>
     _count?: boolean | PlacesCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PlacesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3612,8 +3612,8 @@ export namespace Prisma {
   export type $PlacesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Places"
     objects: {
-      specialsById: Prisma.$SpecialPayload<ExtArgs>[]
       specialsByName: Prisma.$SpecialPayload<ExtArgs>[]
+      specialsById: Prisma.$SpecialPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3985,8 +3985,8 @@ export namespace Prisma {
    */
   export interface Prisma__PlacesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    specialsById<T extends Places$specialsByIdArgs<ExtArgs> = {}>(args?: Subset<T, Places$specialsByIdArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SpecialPayload<ExtArgs>, T, "findMany"> | Null>
     specialsByName<T extends Places$specialsByNameArgs<ExtArgs> = {}>(args?: Subset<T, Places$specialsByNameArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SpecialPayload<ExtArgs>, T, "findMany"> | Null>
+    specialsById<T extends Places$specialsByIdArgs<ExtArgs> = {}>(args?: Subset<T, Places$specialsByIdArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SpecialPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4335,9 +4335,9 @@ export namespace Prisma {
   }
 
   /**
-   * Places.specialsById
+   * Places.specialsByName
    */
-  export type Places$specialsByIdArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Places$specialsByNameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Special
      */
@@ -4355,9 +4355,9 @@ export namespace Prisma {
   }
 
   /**
-   * Places.specialsByName
+   * Places.specialsById
    */
-  export type Places$specialsByNameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Places$specialsByIdArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Special
      */
@@ -4655,11 +4655,11 @@ export namespace Prisma {
     after?: boolean
     placesId?: boolean
     PlaceName?: boolean
-    places?: boolean | PlacesDefaultArgs<ExtArgs>
     placeNa?: boolean | PlacesDefaultArgs<ExtArgs>
+    places?: boolean | PlacesDefaultArgs<ExtArgs>
+    favtype?: boolean | Special$favtypeArgs<ExtArgs>
     favfoodname?: boolean | Special$favfoodnameArgs<ExtArgs>
     favplacename?: boolean | Special$favplacenameArgs<ExtArgs>
-    favtype?: boolean | Special$favtypeArgs<ExtArgs>
     _count?: boolean | SpecialCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["special"]>
 
@@ -4676,8 +4676,8 @@ export namespace Prisma {
     after?: boolean
     placesId?: boolean
     PlaceName?: boolean
-    places?: boolean | PlacesDefaultArgs<ExtArgs>
     placeNa?: boolean | PlacesDefaultArgs<ExtArgs>
+    places?: boolean | PlacesDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["special"]>
 
   export type SpecialSelectScalar = {
@@ -4696,26 +4696,26 @@ export namespace Prisma {
   }
 
   export type SpecialInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    places?: boolean | PlacesDefaultArgs<ExtArgs>
     placeNa?: boolean | PlacesDefaultArgs<ExtArgs>
+    places?: boolean | PlacesDefaultArgs<ExtArgs>
+    favtype?: boolean | Special$favtypeArgs<ExtArgs>
     favfoodname?: boolean | Special$favfoodnameArgs<ExtArgs>
     favplacename?: boolean | Special$favplacenameArgs<ExtArgs>
-    favtype?: boolean | Special$favtypeArgs<ExtArgs>
     _count?: boolean | SpecialCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SpecialIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    places?: boolean | PlacesDefaultArgs<ExtArgs>
     placeNa?: boolean | PlacesDefaultArgs<ExtArgs>
+    places?: boolean | PlacesDefaultArgs<ExtArgs>
   }
 
   export type $SpecialPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Special"
     objects: {
-      places: Prisma.$PlacesPayload<ExtArgs>
       placeNa: Prisma.$PlacesPayload<ExtArgs>
+      places: Prisma.$PlacesPayload<ExtArgs>
+      favtype: Prisma.$FavFoodPayload<ExtArgs>[]
       favfoodname: Prisma.$FavFoodPayload<ExtArgs>[]
       favplacename: Prisma.$FavFoodPayload<ExtArgs>[]
-      favtype: Prisma.$FavFoodPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5094,11 +5094,11 @@ export namespace Prisma {
    */
   export interface Prisma__SpecialClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    places<T extends PlacesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlacesDefaultArgs<ExtArgs>>): Prisma__PlacesClient<$Result.GetResult<Prisma.$PlacesPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     placeNa<T extends PlacesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlacesDefaultArgs<ExtArgs>>): Prisma__PlacesClient<$Result.GetResult<Prisma.$PlacesPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    places<T extends PlacesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PlacesDefaultArgs<ExtArgs>>): Prisma__PlacesClient<$Result.GetResult<Prisma.$PlacesPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    favtype<T extends Special$favtypeArgs<ExtArgs> = {}>(args?: Subset<T, Special$favtypeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavFoodPayload<ExtArgs>, T, "findMany"> | Null>
     favfoodname<T extends Special$favfoodnameArgs<ExtArgs> = {}>(args?: Subset<T, Special$favfoodnameArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavFoodPayload<ExtArgs>, T, "findMany"> | Null>
     favplacename<T extends Special$favplacenameArgs<ExtArgs> = {}>(args?: Subset<T, Special$favplacenameArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavFoodPayload<ExtArgs>, T, "findMany"> | Null>
-    favtype<T extends Special$favtypeArgs<ExtArgs> = {}>(args?: Subset<T, Special$favtypeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FavFoodPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5458,6 +5458,26 @@ export namespace Prisma {
   }
 
   /**
+   * Special.favtype
+   */
+  export type Special$favtypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FavFood
+     */
+    select?: FavFoodSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FavFoodInclude<ExtArgs> | null
+    where?: FavFoodWhereInput
+    orderBy?: FavFoodOrderByWithRelationInput | FavFoodOrderByWithRelationInput[]
+    cursor?: FavFoodWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FavFoodScalarFieldEnum | FavFoodScalarFieldEnum[]
+  }
+
+  /**
    * Special.favfoodname
    */
   export type Special$favfoodnameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5481,26 +5501,6 @@ export namespace Prisma {
    * Special.favplacename
    */
   export type Special$favplacenameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the FavFood
-     */
-    select?: FavFoodSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: FavFoodInclude<ExtArgs> | null
-    where?: FavFoodWhereInput
-    orderBy?: FavFoodOrderByWithRelationInput | FavFoodOrderByWithRelationInput[]
-    cursor?: FavFoodWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: FavFoodScalarFieldEnum | FavFoodScalarFieldEnum[]
-  }
-
-  /**
-   * Special.favtype
-   */
-  export type Special$favtypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the FavFood
      */
@@ -5808,9 +5808,9 @@ export namespace Prisma {
     ffoodtype?: StringNullableFilter<"FavFood"> | string | null
     notified?: StringNullableFilter<"FavFood"> | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
+    favtype?: SpecialListRelationFilter
     favfoodname?: SpecialListRelationFilter
     favplacename?: SpecialListRelationFilter
-    favtype?: SpecialListRelationFilter
   }
 
   export type FavFoodOrderByWithRelationInput = {
@@ -5823,9 +5823,9 @@ export namespace Prisma {
     ffoodtype?: SortOrderInput | SortOrder
     notified?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
+    favtype?: SpecialOrderByRelationAggregateInput
     favfoodname?: SpecialOrderByRelationAggregateInput
     favplacename?: SpecialOrderByRelationAggregateInput
-    favtype?: SpecialOrderByRelationAggregateInput
   }
 
   export type FavFoodWhereUniqueInput = Prisma.AtLeast<{
@@ -5841,9 +5841,9 @@ export namespace Prisma {
     ffoodtype?: StringNullableFilter<"FavFood"> | string | null
     notified?: StringNullableFilter<"FavFood"> | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
+    favtype?: SpecialListRelationFilter
     favfoodname?: SpecialListRelationFilter
     favplacename?: SpecialListRelationFilter
-    favtype?: SpecialListRelationFilter
   }, "id">
 
   export type FavFoodOrderByWithAggregationInput = {
@@ -5885,8 +5885,8 @@ export namespace Prisma {
     location?: StringFilter<"Places"> | string
     type?: StringFilter<"Places"> | string
     imagepath?: StringFilter<"Places"> | string
-    specialsById?: SpecialListRelationFilter
     specialsByName?: SpecialListRelationFilter
+    specialsById?: SpecialListRelationFilter
   }
 
   export type PlacesOrderByWithRelationInput = {
@@ -5895,8 +5895,8 @@ export namespace Prisma {
     location?: SortOrder
     type?: SortOrder
     imagepath?: SortOrder
-    specialsById?: SpecialOrderByRelationAggregateInput
     specialsByName?: SpecialOrderByRelationAggregateInput
+    specialsById?: SpecialOrderByRelationAggregateInput
   }
 
   export type PlacesWhereUniqueInput = Prisma.AtLeast<{
@@ -5908,8 +5908,8 @@ export namespace Prisma {
     location?: StringFilter<"Places"> | string
     type?: StringFilter<"Places"> | string
     imagepath?: StringFilter<"Places"> | string
-    specialsById?: SpecialListRelationFilter
     specialsByName?: SpecialListRelationFilter
+    specialsById?: SpecialListRelationFilter
   }, "id" | "name">
 
   export type PlacesOrderByWithAggregationInput = {
@@ -5952,11 +5952,11 @@ export namespace Prisma {
     after?: FloatFilter<"Special"> | number
     placesId?: IntFilter<"Special"> | number
     PlaceName?: StringFilter<"Special"> | string
-    places?: XOR<PlacesRelationFilter, PlacesWhereInput>
     placeNa?: XOR<PlacesRelationFilter, PlacesWhereInput>
+    places?: XOR<PlacesRelationFilter, PlacesWhereInput>
+    favtype?: FavFoodListRelationFilter
     favfoodname?: FavFoodListRelationFilter
     favplacename?: FavFoodListRelationFilter
-    favtype?: FavFoodListRelationFilter
   }
 
   export type SpecialOrderByWithRelationInput = {
@@ -5972,11 +5972,11 @@ export namespace Prisma {
     after?: SortOrder
     placesId?: SortOrder
     PlaceName?: SortOrder
-    places?: PlacesOrderByWithRelationInput
     placeNa?: PlacesOrderByWithRelationInput
+    places?: PlacesOrderByWithRelationInput
+    favtype?: FavFoodOrderByRelationAggregateInput
     favfoodname?: FavFoodOrderByRelationAggregateInput
     favplacename?: FavFoodOrderByRelationAggregateInput
-    favtype?: FavFoodOrderByRelationAggregateInput
   }
 
   export type SpecialWhereUniqueInput = Prisma.AtLeast<{
@@ -5995,11 +5995,11 @@ export namespace Prisma {
     after?: FloatFilter<"Special"> | number
     placesId?: IntFilter<"Special"> | number
     PlaceName?: StringFilter<"Special"> | string
-    places?: XOR<PlacesRelationFilter, PlacesWhereInput>
     placeNa?: XOR<PlacesRelationFilter, PlacesWhereInput>
+    places?: XOR<PlacesRelationFilter, PlacesWhereInput>
+    favtype?: FavFoodListRelationFilter
     favfoodname?: FavFoodListRelationFilter
     favplacename?: FavFoodListRelationFilter
-    favtype?: FavFoodListRelationFilter
   }, "id">
 
   export type SpecialOrderByWithAggregationInput = {
@@ -6119,9 +6119,9 @@ export namespace Prisma {
     ffoodtype?: string | null
     notified?: string | null
     user: UserCreateNestedOneWithoutFavfoodsInput
+    favtype?: SpecialCreateNestedManyWithoutFavtypeInput
     favfoodname?: SpecialCreateNestedManyWithoutFavfoodnameInput
     favplacename?: SpecialCreateNestedManyWithoutFavplacenameInput
-    favtype?: SpecialCreateNestedManyWithoutFavtypeInput
   }
 
   export type FavFoodUncheckedCreateInput = {
@@ -6133,9 +6133,9 @@ export namespace Prisma {
     fplacename?: string | null
     ffoodtype?: string | null
     notified?: string | null
+    favtype?: SpecialUncheckedCreateNestedManyWithoutFavtypeInput
     favfoodname?: SpecialUncheckedCreateNestedManyWithoutFavfoodnameInput
     favplacename?: SpecialUncheckedCreateNestedManyWithoutFavplacenameInput
-    favtype?: SpecialUncheckedCreateNestedManyWithoutFavtypeInput
   }
 
   export type FavFoodUpdateInput = {
@@ -6146,9 +6146,9 @@ export namespace Prisma {
     ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
     notified?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutFavfoodsNestedInput
+    favtype?: SpecialUpdateManyWithoutFavtypeNestedInput
     favfoodname?: SpecialUpdateManyWithoutFavfoodnameNestedInput
     favplacename?: SpecialUpdateManyWithoutFavplacenameNestedInput
-    favtype?: SpecialUpdateManyWithoutFavtypeNestedInput
   }
 
   export type FavFoodUncheckedUpdateInput = {
@@ -6160,9 +6160,9 @@ export namespace Prisma {
     fplacename?: NullableStringFieldUpdateOperationsInput | string | null
     ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
     notified?: NullableStringFieldUpdateOperationsInput | string | null
+    favtype?: SpecialUncheckedUpdateManyWithoutFavtypeNestedInput
     favfoodname?: SpecialUncheckedUpdateManyWithoutFavfoodnameNestedInput
     favplacename?: SpecialUncheckedUpdateManyWithoutFavplacenameNestedInput
-    favtype?: SpecialUncheckedUpdateManyWithoutFavtypeNestedInput
   }
 
   export type FavFoodCreateManyInput = {
@@ -6201,8 +6201,8 @@ export namespace Prisma {
     location: string
     type: string
     imagepath: string
-    specialsById?: SpecialCreateNestedManyWithoutPlacesInput
     specialsByName?: SpecialCreateNestedManyWithoutPlaceNaInput
+    specialsById?: SpecialCreateNestedManyWithoutPlacesInput
   }
 
   export type PlacesUncheckedCreateInput = {
@@ -6211,8 +6211,8 @@ export namespace Prisma {
     location: string
     type: string
     imagepath: string
-    specialsById?: SpecialUncheckedCreateNestedManyWithoutPlacesInput
     specialsByName?: SpecialUncheckedCreateNestedManyWithoutPlaceNaInput
+    specialsById?: SpecialUncheckedCreateNestedManyWithoutPlacesInput
   }
 
   export type PlacesUpdateInput = {
@@ -6220,8 +6220,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     imagepath?: StringFieldUpdateOperationsInput | string
-    specialsById?: SpecialUpdateManyWithoutPlacesNestedInput
     specialsByName?: SpecialUpdateManyWithoutPlaceNaNestedInput
+    specialsById?: SpecialUpdateManyWithoutPlacesNestedInput
   }
 
   export type PlacesUncheckedUpdateInput = {
@@ -6230,8 +6230,8 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
     imagepath?: StringFieldUpdateOperationsInput | string
-    specialsById?: SpecialUncheckedUpdateManyWithoutPlacesNestedInput
     specialsByName?: SpecialUncheckedUpdateManyWithoutPlaceNaNestedInput
+    specialsById?: SpecialUncheckedUpdateManyWithoutPlacesNestedInput
   }
 
   export type PlacesCreateManyInput = {
@@ -6267,11 +6267,11 @@ export namespace Prisma {
     till: string
     before: number
     after: number
-    places: PlacesCreateNestedOneWithoutSpecialsByIdInput
     placeNa: PlacesCreateNestedOneWithoutSpecialsByNameInput
+    places: PlacesCreateNestedOneWithoutSpecialsByIdInput
+    favtype?: FavFoodCreateNestedManyWithoutFavtypeInput
     favfoodname?: FavFoodCreateNestedManyWithoutFavfoodnameInput
     favplacename?: FavFoodCreateNestedManyWithoutFavplacenameInput
-    favtype?: FavFoodCreateNestedManyWithoutFavtypeInput
   }
 
   export type SpecialUncheckedCreateInput = {
@@ -6287,9 +6287,9 @@ export namespace Prisma {
     after: number
     placesId: number
     PlaceName: string
+    favtype?: FavFoodUncheckedCreateNestedManyWithoutFavtypeInput
     favfoodname?: FavFoodUncheckedCreateNestedManyWithoutFavfoodnameInput
     favplacename?: FavFoodUncheckedCreateNestedManyWithoutFavplacenameInput
-    favtype?: FavFoodUncheckedCreateNestedManyWithoutFavtypeInput
   }
 
   export type SpecialUpdateInput = {
@@ -6302,11 +6302,11 @@ export namespace Prisma {
     till?: StringFieldUpdateOperationsInput | string
     before?: FloatFieldUpdateOperationsInput | number
     after?: FloatFieldUpdateOperationsInput | number
-    places?: PlacesUpdateOneRequiredWithoutSpecialsByIdNestedInput
     placeNa?: PlacesUpdateOneRequiredWithoutSpecialsByNameNestedInput
+    places?: PlacesUpdateOneRequiredWithoutSpecialsByIdNestedInput
+    favtype?: FavFoodUpdateManyWithoutFavtypeNestedInput
     favfoodname?: FavFoodUpdateManyWithoutFavfoodnameNestedInput
     favplacename?: FavFoodUpdateManyWithoutFavplacenameNestedInput
-    favtype?: FavFoodUpdateManyWithoutFavtypeNestedInput
   }
 
   export type SpecialUncheckedUpdateInput = {
@@ -6322,9 +6322,9 @@ export namespace Prisma {
     after?: FloatFieldUpdateOperationsInput | number
     placesId?: IntFieldUpdateOperationsInput | number
     PlaceName?: StringFieldUpdateOperationsInput | string
+    favtype?: FavFoodUncheckedUpdateManyWithoutFavtypeNestedInput
     favfoodname?: FavFoodUncheckedUpdateManyWithoutFavfoodnameNestedInput
     favplacename?: FavFoodUncheckedUpdateManyWithoutFavplacenameNestedInput
-    favtype?: FavFoodUncheckedUpdateManyWithoutFavtypeNestedInput
   }
 
   export type SpecialCreateManyInput = {
@@ -6843,6 +6843,12 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type SpecialCreateNestedManyWithoutFavtypeInput = {
+    create?: XOR<SpecialCreateWithoutFavtypeInput, SpecialUncheckedCreateWithoutFavtypeInput> | SpecialCreateWithoutFavtypeInput[] | SpecialUncheckedCreateWithoutFavtypeInput[]
+    connectOrCreate?: SpecialCreateOrConnectWithoutFavtypeInput | SpecialCreateOrConnectWithoutFavtypeInput[]
+    connect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
+  }
+
   export type SpecialCreateNestedManyWithoutFavfoodnameInput = {
     create?: XOR<SpecialCreateWithoutFavfoodnameInput, SpecialUncheckedCreateWithoutFavfoodnameInput> | SpecialCreateWithoutFavfoodnameInput[] | SpecialUncheckedCreateWithoutFavfoodnameInput[]
     connectOrCreate?: SpecialCreateOrConnectWithoutFavfoodnameInput | SpecialCreateOrConnectWithoutFavfoodnameInput[]
@@ -6855,7 +6861,7 @@ export namespace Prisma {
     connect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
   }
 
-  export type SpecialCreateNestedManyWithoutFavtypeInput = {
+  export type SpecialUncheckedCreateNestedManyWithoutFavtypeInput = {
     create?: XOR<SpecialCreateWithoutFavtypeInput, SpecialUncheckedCreateWithoutFavtypeInput> | SpecialCreateWithoutFavtypeInput[] | SpecialUncheckedCreateWithoutFavtypeInput[]
     connectOrCreate?: SpecialCreateOrConnectWithoutFavtypeInput | SpecialCreateOrConnectWithoutFavtypeInput[]
     connect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
@@ -6873,18 +6879,25 @@ export namespace Prisma {
     connect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
   }
 
-  export type SpecialUncheckedCreateNestedManyWithoutFavtypeInput = {
-    create?: XOR<SpecialCreateWithoutFavtypeInput, SpecialUncheckedCreateWithoutFavtypeInput> | SpecialCreateWithoutFavtypeInput[] | SpecialUncheckedCreateWithoutFavtypeInput[]
-    connectOrCreate?: SpecialCreateOrConnectWithoutFavtypeInput | SpecialCreateOrConnectWithoutFavtypeInput[]
-    connect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
-  }
-
   export type UserUpdateOneRequiredWithoutFavfoodsNestedInput = {
     create?: XOR<UserCreateWithoutFavfoodsInput, UserUncheckedCreateWithoutFavfoodsInput>
     connectOrCreate?: UserCreateOrConnectWithoutFavfoodsInput
     upsert?: UserUpsertWithoutFavfoodsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFavfoodsInput, UserUpdateWithoutFavfoodsInput>, UserUncheckedUpdateWithoutFavfoodsInput>
+  }
+
+  export type SpecialUpdateManyWithoutFavtypeNestedInput = {
+    create?: XOR<SpecialCreateWithoutFavtypeInput, SpecialUncheckedCreateWithoutFavtypeInput> | SpecialCreateWithoutFavtypeInput[] | SpecialUncheckedCreateWithoutFavtypeInput[]
+    connectOrCreate?: SpecialCreateOrConnectWithoutFavtypeInput | SpecialCreateOrConnectWithoutFavtypeInput[]
+    upsert?: SpecialUpsertWithWhereUniqueWithoutFavtypeInput | SpecialUpsertWithWhereUniqueWithoutFavtypeInput[]
+    set?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
+    disconnect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
+    delete?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
+    connect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
+    update?: SpecialUpdateWithWhereUniqueWithoutFavtypeInput | SpecialUpdateWithWhereUniqueWithoutFavtypeInput[]
+    updateMany?: SpecialUpdateManyWithWhereWithoutFavtypeInput | SpecialUpdateManyWithWhereWithoutFavtypeInput[]
+    deleteMany?: SpecialScalarWhereInput | SpecialScalarWhereInput[]
   }
 
   export type SpecialUpdateManyWithoutFavfoodnameNestedInput = {
@@ -6913,7 +6926,7 @@ export namespace Prisma {
     deleteMany?: SpecialScalarWhereInput | SpecialScalarWhereInput[]
   }
 
-  export type SpecialUpdateManyWithoutFavtypeNestedInput = {
+  export type SpecialUncheckedUpdateManyWithoutFavtypeNestedInput = {
     create?: XOR<SpecialCreateWithoutFavtypeInput, SpecialUncheckedCreateWithoutFavtypeInput> | SpecialCreateWithoutFavtypeInput[] | SpecialUncheckedCreateWithoutFavtypeInput[]
     connectOrCreate?: SpecialCreateOrConnectWithoutFavtypeInput | SpecialCreateOrConnectWithoutFavtypeInput[]
     upsert?: SpecialUpsertWithWhereUniqueWithoutFavtypeInput | SpecialUpsertWithWhereUniqueWithoutFavtypeInput[]
@@ -6952,26 +6965,6 @@ export namespace Prisma {
     deleteMany?: SpecialScalarWhereInput | SpecialScalarWhereInput[]
   }
 
-  export type SpecialUncheckedUpdateManyWithoutFavtypeNestedInput = {
-    create?: XOR<SpecialCreateWithoutFavtypeInput, SpecialUncheckedCreateWithoutFavtypeInput> | SpecialCreateWithoutFavtypeInput[] | SpecialUncheckedCreateWithoutFavtypeInput[]
-    connectOrCreate?: SpecialCreateOrConnectWithoutFavtypeInput | SpecialCreateOrConnectWithoutFavtypeInput[]
-    upsert?: SpecialUpsertWithWhereUniqueWithoutFavtypeInput | SpecialUpsertWithWhereUniqueWithoutFavtypeInput[]
-    set?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
-    disconnect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
-    delete?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
-    connect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
-    update?: SpecialUpdateWithWhereUniqueWithoutFavtypeInput | SpecialUpdateWithWhereUniqueWithoutFavtypeInput[]
-    updateMany?: SpecialUpdateManyWithWhereWithoutFavtypeInput | SpecialUpdateManyWithWhereWithoutFavtypeInput[]
-    deleteMany?: SpecialScalarWhereInput | SpecialScalarWhereInput[]
-  }
-
-  export type SpecialCreateNestedManyWithoutPlacesInput = {
-    create?: XOR<SpecialCreateWithoutPlacesInput, SpecialUncheckedCreateWithoutPlacesInput> | SpecialCreateWithoutPlacesInput[] | SpecialUncheckedCreateWithoutPlacesInput[]
-    connectOrCreate?: SpecialCreateOrConnectWithoutPlacesInput | SpecialCreateOrConnectWithoutPlacesInput[]
-    createMany?: SpecialCreateManyPlacesInputEnvelope
-    connect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
-  }
-
   export type SpecialCreateNestedManyWithoutPlaceNaInput = {
     create?: XOR<SpecialCreateWithoutPlaceNaInput, SpecialUncheckedCreateWithoutPlaceNaInput> | SpecialCreateWithoutPlaceNaInput[] | SpecialUncheckedCreateWithoutPlaceNaInput[]
     connectOrCreate?: SpecialCreateOrConnectWithoutPlaceNaInput | SpecialCreateOrConnectWithoutPlaceNaInput[]
@@ -6979,7 +6972,7 @@ export namespace Prisma {
     connect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
   }
 
-  export type SpecialUncheckedCreateNestedManyWithoutPlacesInput = {
+  export type SpecialCreateNestedManyWithoutPlacesInput = {
     create?: XOR<SpecialCreateWithoutPlacesInput, SpecialUncheckedCreateWithoutPlacesInput> | SpecialCreateWithoutPlacesInput[] | SpecialUncheckedCreateWithoutPlacesInput[]
     connectOrCreate?: SpecialCreateOrConnectWithoutPlacesInput | SpecialCreateOrConnectWithoutPlacesInput[]
     createMany?: SpecialCreateManyPlacesInputEnvelope
@@ -6993,18 +6986,11 @@ export namespace Prisma {
     connect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
   }
 
-  export type SpecialUpdateManyWithoutPlacesNestedInput = {
+  export type SpecialUncheckedCreateNestedManyWithoutPlacesInput = {
     create?: XOR<SpecialCreateWithoutPlacesInput, SpecialUncheckedCreateWithoutPlacesInput> | SpecialCreateWithoutPlacesInput[] | SpecialUncheckedCreateWithoutPlacesInput[]
     connectOrCreate?: SpecialCreateOrConnectWithoutPlacesInput | SpecialCreateOrConnectWithoutPlacesInput[]
-    upsert?: SpecialUpsertWithWhereUniqueWithoutPlacesInput | SpecialUpsertWithWhereUniqueWithoutPlacesInput[]
     createMany?: SpecialCreateManyPlacesInputEnvelope
-    set?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
-    disconnect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
-    delete?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
     connect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
-    update?: SpecialUpdateWithWhereUniqueWithoutPlacesInput | SpecialUpdateWithWhereUniqueWithoutPlacesInput[]
-    updateMany?: SpecialUpdateManyWithWhereWithoutPlacesInput | SpecialUpdateManyWithWhereWithoutPlacesInput[]
-    deleteMany?: SpecialScalarWhereInput | SpecialScalarWhereInput[]
   }
 
   export type SpecialUpdateManyWithoutPlaceNaNestedInput = {
@@ -7021,7 +7007,7 @@ export namespace Prisma {
     deleteMany?: SpecialScalarWhereInput | SpecialScalarWhereInput[]
   }
 
-  export type SpecialUncheckedUpdateManyWithoutPlacesNestedInput = {
+  export type SpecialUpdateManyWithoutPlacesNestedInput = {
     create?: XOR<SpecialCreateWithoutPlacesInput, SpecialUncheckedCreateWithoutPlacesInput> | SpecialCreateWithoutPlacesInput[] | SpecialUncheckedCreateWithoutPlacesInput[]
     connectOrCreate?: SpecialCreateOrConnectWithoutPlacesInput | SpecialCreateOrConnectWithoutPlacesInput[]
     upsert?: SpecialUpsertWithWhereUniqueWithoutPlacesInput | SpecialUpsertWithWhereUniqueWithoutPlacesInput[]
@@ -7049,16 +7035,36 @@ export namespace Prisma {
     deleteMany?: SpecialScalarWhereInput | SpecialScalarWhereInput[]
   }
 
-  export type PlacesCreateNestedOneWithoutSpecialsByIdInput = {
-    create?: XOR<PlacesCreateWithoutSpecialsByIdInput, PlacesUncheckedCreateWithoutSpecialsByIdInput>
-    connectOrCreate?: PlacesCreateOrConnectWithoutSpecialsByIdInput
-    connect?: PlacesWhereUniqueInput
+  export type SpecialUncheckedUpdateManyWithoutPlacesNestedInput = {
+    create?: XOR<SpecialCreateWithoutPlacesInput, SpecialUncheckedCreateWithoutPlacesInput> | SpecialCreateWithoutPlacesInput[] | SpecialUncheckedCreateWithoutPlacesInput[]
+    connectOrCreate?: SpecialCreateOrConnectWithoutPlacesInput | SpecialCreateOrConnectWithoutPlacesInput[]
+    upsert?: SpecialUpsertWithWhereUniqueWithoutPlacesInput | SpecialUpsertWithWhereUniqueWithoutPlacesInput[]
+    createMany?: SpecialCreateManyPlacesInputEnvelope
+    set?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
+    disconnect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
+    delete?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
+    connect?: SpecialWhereUniqueInput | SpecialWhereUniqueInput[]
+    update?: SpecialUpdateWithWhereUniqueWithoutPlacesInput | SpecialUpdateWithWhereUniqueWithoutPlacesInput[]
+    updateMany?: SpecialUpdateManyWithWhereWithoutPlacesInput | SpecialUpdateManyWithWhereWithoutPlacesInput[]
+    deleteMany?: SpecialScalarWhereInput | SpecialScalarWhereInput[]
   }
 
   export type PlacesCreateNestedOneWithoutSpecialsByNameInput = {
     create?: XOR<PlacesCreateWithoutSpecialsByNameInput, PlacesUncheckedCreateWithoutSpecialsByNameInput>
     connectOrCreate?: PlacesCreateOrConnectWithoutSpecialsByNameInput
     connect?: PlacesWhereUniqueInput
+  }
+
+  export type PlacesCreateNestedOneWithoutSpecialsByIdInput = {
+    create?: XOR<PlacesCreateWithoutSpecialsByIdInput, PlacesUncheckedCreateWithoutSpecialsByIdInput>
+    connectOrCreate?: PlacesCreateOrConnectWithoutSpecialsByIdInput
+    connect?: PlacesWhereUniqueInput
+  }
+
+  export type FavFoodCreateNestedManyWithoutFavtypeInput = {
+    create?: XOR<FavFoodCreateWithoutFavtypeInput, FavFoodUncheckedCreateWithoutFavtypeInput> | FavFoodCreateWithoutFavtypeInput[] | FavFoodUncheckedCreateWithoutFavtypeInput[]
+    connectOrCreate?: FavFoodCreateOrConnectWithoutFavtypeInput | FavFoodCreateOrConnectWithoutFavtypeInput[]
+    connect?: FavFoodWhereUniqueInput | FavFoodWhereUniqueInput[]
   }
 
   export type FavFoodCreateNestedManyWithoutFavfoodnameInput = {
@@ -7073,7 +7079,7 @@ export namespace Prisma {
     connect?: FavFoodWhereUniqueInput | FavFoodWhereUniqueInput[]
   }
 
-  export type FavFoodCreateNestedManyWithoutFavtypeInput = {
+  export type FavFoodUncheckedCreateNestedManyWithoutFavtypeInput = {
     create?: XOR<FavFoodCreateWithoutFavtypeInput, FavFoodUncheckedCreateWithoutFavtypeInput> | FavFoodCreateWithoutFavtypeInput[] | FavFoodUncheckedCreateWithoutFavtypeInput[]
     connectOrCreate?: FavFoodCreateOrConnectWithoutFavtypeInput | FavFoodCreateOrConnectWithoutFavtypeInput[]
     connect?: FavFoodWhereUniqueInput | FavFoodWhereUniqueInput[]
@@ -7091,12 +7097,6 @@ export namespace Prisma {
     connect?: FavFoodWhereUniqueInput | FavFoodWhereUniqueInput[]
   }
 
-  export type FavFoodUncheckedCreateNestedManyWithoutFavtypeInput = {
-    create?: XOR<FavFoodCreateWithoutFavtypeInput, FavFoodUncheckedCreateWithoutFavtypeInput> | FavFoodCreateWithoutFavtypeInput[] | FavFoodUncheckedCreateWithoutFavtypeInput[]
-    connectOrCreate?: FavFoodCreateOrConnectWithoutFavtypeInput | FavFoodCreateOrConnectWithoutFavtypeInput[]
-    connect?: FavFoodWhereUniqueInput | FavFoodWhereUniqueInput[]
-  }
-
   export type EnumFoodOrGrocFieldUpdateOperationsInput = {
     set?: $Enums.FoodOrGroc
   }
@@ -7109,6 +7109,14 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type PlacesUpdateOneRequiredWithoutSpecialsByNameNestedInput = {
+    create?: XOR<PlacesCreateWithoutSpecialsByNameInput, PlacesUncheckedCreateWithoutSpecialsByNameInput>
+    connectOrCreate?: PlacesCreateOrConnectWithoutSpecialsByNameInput
+    upsert?: PlacesUpsertWithoutSpecialsByNameInput
+    connect?: PlacesWhereUniqueInput
+    update?: XOR<XOR<PlacesUpdateToOneWithWhereWithoutSpecialsByNameInput, PlacesUpdateWithoutSpecialsByNameInput>, PlacesUncheckedUpdateWithoutSpecialsByNameInput>
+  }
+
   export type PlacesUpdateOneRequiredWithoutSpecialsByIdNestedInput = {
     create?: XOR<PlacesCreateWithoutSpecialsByIdInput, PlacesUncheckedCreateWithoutSpecialsByIdInput>
     connectOrCreate?: PlacesCreateOrConnectWithoutSpecialsByIdInput
@@ -7117,12 +7125,17 @@ export namespace Prisma {
     update?: XOR<XOR<PlacesUpdateToOneWithWhereWithoutSpecialsByIdInput, PlacesUpdateWithoutSpecialsByIdInput>, PlacesUncheckedUpdateWithoutSpecialsByIdInput>
   }
 
-  export type PlacesUpdateOneRequiredWithoutSpecialsByNameNestedInput = {
-    create?: XOR<PlacesCreateWithoutSpecialsByNameInput, PlacesUncheckedCreateWithoutSpecialsByNameInput>
-    connectOrCreate?: PlacesCreateOrConnectWithoutSpecialsByNameInput
-    upsert?: PlacesUpsertWithoutSpecialsByNameInput
-    connect?: PlacesWhereUniqueInput
-    update?: XOR<XOR<PlacesUpdateToOneWithWhereWithoutSpecialsByNameInput, PlacesUpdateWithoutSpecialsByNameInput>, PlacesUncheckedUpdateWithoutSpecialsByNameInput>
+  export type FavFoodUpdateManyWithoutFavtypeNestedInput = {
+    create?: XOR<FavFoodCreateWithoutFavtypeInput, FavFoodUncheckedCreateWithoutFavtypeInput> | FavFoodCreateWithoutFavtypeInput[] | FavFoodUncheckedCreateWithoutFavtypeInput[]
+    connectOrCreate?: FavFoodCreateOrConnectWithoutFavtypeInput | FavFoodCreateOrConnectWithoutFavtypeInput[]
+    upsert?: FavFoodUpsertWithWhereUniqueWithoutFavtypeInput | FavFoodUpsertWithWhereUniqueWithoutFavtypeInput[]
+    set?: FavFoodWhereUniqueInput | FavFoodWhereUniqueInput[]
+    disconnect?: FavFoodWhereUniqueInput | FavFoodWhereUniqueInput[]
+    delete?: FavFoodWhereUniqueInput | FavFoodWhereUniqueInput[]
+    connect?: FavFoodWhereUniqueInput | FavFoodWhereUniqueInput[]
+    update?: FavFoodUpdateWithWhereUniqueWithoutFavtypeInput | FavFoodUpdateWithWhereUniqueWithoutFavtypeInput[]
+    updateMany?: FavFoodUpdateManyWithWhereWithoutFavtypeInput | FavFoodUpdateManyWithWhereWithoutFavtypeInput[]
+    deleteMany?: FavFoodScalarWhereInput | FavFoodScalarWhereInput[]
   }
 
   export type FavFoodUpdateManyWithoutFavfoodnameNestedInput = {
@@ -7151,7 +7164,7 @@ export namespace Prisma {
     deleteMany?: FavFoodScalarWhereInput | FavFoodScalarWhereInput[]
   }
 
-  export type FavFoodUpdateManyWithoutFavtypeNestedInput = {
+  export type FavFoodUncheckedUpdateManyWithoutFavtypeNestedInput = {
     create?: XOR<FavFoodCreateWithoutFavtypeInput, FavFoodUncheckedCreateWithoutFavtypeInput> | FavFoodCreateWithoutFavtypeInput[] | FavFoodUncheckedCreateWithoutFavtypeInput[]
     connectOrCreate?: FavFoodCreateOrConnectWithoutFavtypeInput | FavFoodCreateOrConnectWithoutFavtypeInput[]
     upsert?: FavFoodUpsertWithWhereUniqueWithoutFavtypeInput | FavFoodUpsertWithWhereUniqueWithoutFavtypeInput[]
@@ -7187,19 +7200,6 @@ export namespace Prisma {
     connect?: FavFoodWhereUniqueInput | FavFoodWhereUniqueInput[]
     update?: FavFoodUpdateWithWhereUniqueWithoutFavplacenameInput | FavFoodUpdateWithWhereUniqueWithoutFavplacenameInput[]
     updateMany?: FavFoodUpdateManyWithWhereWithoutFavplacenameInput | FavFoodUpdateManyWithWhereWithoutFavplacenameInput[]
-    deleteMany?: FavFoodScalarWhereInput | FavFoodScalarWhereInput[]
-  }
-
-  export type FavFoodUncheckedUpdateManyWithoutFavtypeNestedInput = {
-    create?: XOR<FavFoodCreateWithoutFavtypeInput, FavFoodUncheckedCreateWithoutFavtypeInput> | FavFoodCreateWithoutFavtypeInput[] | FavFoodUncheckedCreateWithoutFavtypeInput[]
-    connectOrCreate?: FavFoodCreateOrConnectWithoutFavtypeInput | FavFoodCreateOrConnectWithoutFavtypeInput[]
-    upsert?: FavFoodUpsertWithWhereUniqueWithoutFavtypeInput | FavFoodUpsertWithWhereUniqueWithoutFavtypeInput[]
-    set?: FavFoodWhereUniqueInput | FavFoodWhereUniqueInput[]
-    disconnect?: FavFoodWhereUniqueInput | FavFoodWhereUniqueInput[]
-    delete?: FavFoodWhereUniqueInput | FavFoodWhereUniqueInput[]
-    connect?: FavFoodWhereUniqueInput | FavFoodWhereUniqueInput[]
-    update?: FavFoodUpdateWithWhereUniqueWithoutFavtypeInput | FavFoodUpdateWithWhereUniqueWithoutFavtypeInput[]
-    updateMany?: FavFoodUpdateManyWithWhereWithoutFavtypeInput | FavFoodUpdateManyWithWhereWithoutFavtypeInput[]
     deleteMany?: FavFoodScalarWhereInput | FavFoodScalarWhereInput[]
   }
 
@@ -7393,9 +7393,9 @@ export namespace Prisma {
     fplacename?: string | null
     ffoodtype?: string | null
     notified?: string | null
+    favtype?: SpecialCreateNestedManyWithoutFavtypeInput
     favfoodname?: SpecialCreateNestedManyWithoutFavfoodnameInput
     favplacename?: SpecialCreateNestedManyWithoutFavplacenameInput
-    favtype?: SpecialCreateNestedManyWithoutFavtypeInput
   }
 
   export type FavFoodUncheckedCreateWithoutUserInput = {
@@ -7406,9 +7406,9 @@ export namespace Prisma {
     fplacename?: string | null
     ffoodtype?: string | null
     notified?: string | null
+    favtype?: SpecialUncheckedCreateNestedManyWithoutFavtypeInput
     favfoodname?: SpecialUncheckedCreateNestedManyWithoutFavfoodnameInput
     favplacename?: SpecialUncheckedCreateNestedManyWithoutFavplacenameInput
-    favtype?: SpecialUncheckedCreateNestedManyWithoutFavtypeInput
   }
 
   export type FavFoodCreateOrConnectWithoutUserInput = {
@@ -7475,82 +7475,6 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutFavfoodsInput, UserUncheckedCreateWithoutFavfoodsInput>
   }
 
-  export type SpecialCreateWithoutFavfoodnameInput = {
-    name: string
-    type: string
-    poster?: string
-    foodorgroc: $Enums.FoodOrGroc
-    imagepath: string
-    from: string
-    till: string
-    before: number
-    after: number
-    places: PlacesCreateNestedOneWithoutSpecialsByIdInput
-    placeNa: PlacesCreateNestedOneWithoutSpecialsByNameInput
-    favplacename?: FavFoodCreateNestedManyWithoutFavplacenameInput
-    favtype?: FavFoodCreateNestedManyWithoutFavtypeInput
-  }
-
-  export type SpecialUncheckedCreateWithoutFavfoodnameInput = {
-    id?: number
-    name: string
-    type: string
-    poster?: string
-    foodorgroc: $Enums.FoodOrGroc
-    imagepath: string
-    from: string
-    till: string
-    before: number
-    after: number
-    placesId: number
-    PlaceName: string
-    favplacename?: FavFoodUncheckedCreateNestedManyWithoutFavplacenameInput
-    favtype?: FavFoodUncheckedCreateNestedManyWithoutFavtypeInput
-  }
-
-  export type SpecialCreateOrConnectWithoutFavfoodnameInput = {
-    where: SpecialWhereUniqueInput
-    create: XOR<SpecialCreateWithoutFavfoodnameInput, SpecialUncheckedCreateWithoutFavfoodnameInput>
-  }
-
-  export type SpecialCreateWithoutFavplacenameInput = {
-    name: string
-    type: string
-    poster?: string
-    foodorgroc: $Enums.FoodOrGroc
-    imagepath: string
-    from: string
-    till: string
-    before: number
-    after: number
-    places: PlacesCreateNestedOneWithoutSpecialsByIdInput
-    placeNa: PlacesCreateNestedOneWithoutSpecialsByNameInput
-    favfoodname?: FavFoodCreateNestedManyWithoutFavfoodnameInput
-    favtype?: FavFoodCreateNestedManyWithoutFavtypeInput
-  }
-
-  export type SpecialUncheckedCreateWithoutFavplacenameInput = {
-    id?: number
-    name: string
-    type: string
-    poster?: string
-    foodorgroc: $Enums.FoodOrGroc
-    imagepath: string
-    from: string
-    till: string
-    before: number
-    after: number
-    placesId: number
-    PlaceName: string
-    favfoodname?: FavFoodUncheckedCreateNestedManyWithoutFavfoodnameInput
-    favtype?: FavFoodUncheckedCreateNestedManyWithoutFavtypeInput
-  }
-
-  export type SpecialCreateOrConnectWithoutFavplacenameInput = {
-    where: SpecialWhereUniqueInput
-    create: XOR<SpecialCreateWithoutFavplacenameInput, SpecialUncheckedCreateWithoutFavplacenameInput>
-  }
-
   export type SpecialCreateWithoutFavtypeInput = {
     name: string
     type: string
@@ -7561,8 +7485,8 @@ export namespace Prisma {
     till: string
     before: number
     after: number
-    places: PlacesCreateNestedOneWithoutSpecialsByIdInput
     placeNa: PlacesCreateNestedOneWithoutSpecialsByNameInput
+    places: PlacesCreateNestedOneWithoutSpecialsByIdInput
     favfoodname?: FavFoodCreateNestedManyWithoutFavfoodnameInput
     favplacename?: FavFoodCreateNestedManyWithoutFavplacenameInput
   }
@@ -7587,6 +7511,82 @@ export namespace Prisma {
   export type SpecialCreateOrConnectWithoutFavtypeInput = {
     where: SpecialWhereUniqueInput
     create: XOR<SpecialCreateWithoutFavtypeInput, SpecialUncheckedCreateWithoutFavtypeInput>
+  }
+
+  export type SpecialCreateWithoutFavfoodnameInput = {
+    name: string
+    type: string
+    poster?: string
+    foodorgroc: $Enums.FoodOrGroc
+    imagepath: string
+    from: string
+    till: string
+    before: number
+    after: number
+    placeNa: PlacesCreateNestedOneWithoutSpecialsByNameInput
+    places: PlacesCreateNestedOneWithoutSpecialsByIdInput
+    favtype?: FavFoodCreateNestedManyWithoutFavtypeInput
+    favplacename?: FavFoodCreateNestedManyWithoutFavplacenameInput
+  }
+
+  export type SpecialUncheckedCreateWithoutFavfoodnameInput = {
+    id?: number
+    name: string
+    type: string
+    poster?: string
+    foodorgroc: $Enums.FoodOrGroc
+    imagepath: string
+    from: string
+    till: string
+    before: number
+    after: number
+    placesId: number
+    PlaceName: string
+    favtype?: FavFoodUncheckedCreateNestedManyWithoutFavtypeInput
+    favplacename?: FavFoodUncheckedCreateNestedManyWithoutFavplacenameInput
+  }
+
+  export type SpecialCreateOrConnectWithoutFavfoodnameInput = {
+    where: SpecialWhereUniqueInput
+    create: XOR<SpecialCreateWithoutFavfoodnameInput, SpecialUncheckedCreateWithoutFavfoodnameInput>
+  }
+
+  export type SpecialCreateWithoutFavplacenameInput = {
+    name: string
+    type: string
+    poster?: string
+    foodorgroc: $Enums.FoodOrGroc
+    imagepath: string
+    from: string
+    till: string
+    before: number
+    after: number
+    placeNa: PlacesCreateNestedOneWithoutSpecialsByNameInput
+    places: PlacesCreateNestedOneWithoutSpecialsByIdInput
+    favtype?: FavFoodCreateNestedManyWithoutFavtypeInput
+    favfoodname?: FavFoodCreateNestedManyWithoutFavfoodnameInput
+  }
+
+  export type SpecialUncheckedCreateWithoutFavplacenameInput = {
+    id?: number
+    name: string
+    type: string
+    poster?: string
+    foodorgroc: $Enums.FoodOrGroc
+    imagepath: string
+    from: string
+    till: string
+    before: number
+    after: number
+    placesId: number
+    PlaceName: string
+    favtype?: FavFoodUncheckedCreateNestedManyWithoutFavtypeInput
+    favfoodname?: FavFoodUncheckedCreateNestedManyWithoutFavfoodnameInput
+  }
+
+  export type SpecialCreateOrConnectWithoutFavplacenameInput = {
+    where: SpecialWhereUniqueInput
+    create: XOR<SpecialCreateWithoutFavplacenameInput, SpecialUncheckedCreateWithoutFavplacenameInput>
   }
 
   export type UserUpsertWithoutFavfoodsInput = {
@@ -7619,20 +7619,20 @@ export namespace Prisma {
     subscription?: NullableJsonNullValueInput | InputJsonValue
   }
 
-  export type SpecialUpsertWithWhereUniqueWithoutFavfoodnameInput = {
+  export type SpecialUpsertWithWhereUniqueWithoutFavtypeInput = {
     where: SpecialWhereUniqueInput
-    update: XOR<SpecialUpdateWithoutFavfoodnameInput, SpecialUncheckedUpdateWithoutFavfoodnameInput>
-    create: XOR<SpecialCreateWithoutFavfoodnameInput, SpecialUncheckedCreateWithoutFavfoodnameInput>
+    update: XOR<SpecialUpdateWithoutFavtypeInput, SpecialUncheckedUpdateWithoutFavtypeInput>
+    create: XOR<SpecialCreateWithoutFavtypeInput, SpecialUncheckedCreateWithoutFavtypeInput>
   }
 
-  export type SpecialUpdateWithWhereUniqueWithoutFavfoodnameInput = {
+  export type SpecialUpdateWithWhereUniqueWithoutFavtypeInput = {
     where: SpecialWhereUniqueInput
-    data: XOR<SpecialUpdateWithoutFavfoodnameInput, SpecialUncheckedUpdateWithoutFavfoodnameInput>
+    data: XOR<SpecialUpdateWithoutFavtypeInput, SpecialUncheckedUpdateWithoutFavtypeInput>
   }
 
-  export type SpecialUpdateManyWithWhereWithoutFavfoodnameInput = {
+  export type SpecialUpdateManyWithWhereWithoutFavtypeInput = {
     where: SpecialScalarWhereInput
-    data: XOR<SpecialUpdateManyMutationInput, SpecialUncheckedUpdateManyWithoutFavfoodnameInput>
+    data: XOR<SpecialUpdateManyMutationInput, SpecialUncheckedUpdateManyWithoutFavtypeInput>
   }
 
   export type SpecialScalarWhereInput = {
@@ -7653,6 +7653,22 @@ export namespace Prisma {
     PlaceName?: StringFilter<"Special"> | string
   }
 
+  export type SpecialUpsertWithWhereUniqueWithoutFavfoodnameInput = {
+    where: SpecialWhereUniqueInput
+    update: XOR<SpecialUpdateWithoutFavfoodnameInput, SpecialUncheckedUpdateWithoutFavfoodnameInput>
+    create: XOR<SpecialCreateWithoutFavfoodnameInput, SpecialUncheckedCreateWithoutFavfoodnameInput>
+  }
+
+  export type SpecialUpdateWithWhereUniqueWithoutFavfoodnameInput = {
+    where: SpecialWhereUniqueInput
+    data: XOR<SpecialUpdateWithoutFavfoodnameInput, SpecialUncheckedUpdateWithoutFavfoodnameInput>
+  }
+
+  export type SpecialUpdateManyWithWhereWithoutFavfoodnameInput = {
+    where: SpecialScalarWhereInput
+    data: XOR<SpecialUpdateManyMutationInput, SpecialUncheckedUpdateManyWithoutFavfoodnameInput>
+  }
+
   export type SpecialUpsertWithWhereUniqueWithoutFavplacenameInput = {
     where: SpecialWhereUniqueInput
     update: XOR<SpecialUpdateWithoutFavplacenameInput, SpecialUncheckedUpdateWithoutFavplacenameInput>
@@ -7669,65 +7685,6 @@ export namespace Prisma {
     data: XOR<SpecialUpdateManyMutationInput, SpecialUncheckedUpdateManyWithoutFavplacenameInput>
   }
 
-  export type SpecialUpsertWithWhereUniqueWithoutFavtypeInput = {
-    where: SpecialWhereUniqueInput
-    update: XOR<SpecialUpdateWithoutFavtypeInput, SpecialUncheckedUpdateWithoutFavtypeInput>
-    create: XOR<SpecialCreateWithoutFavtypeInput, SpecialUncheckedCreateWithoutFavtypeInput>
-  }
-
-  export type SpecialUpdateWithWhereUniqueWithoutFavtypeInput = {
-    where: SpecialWhereUniqueInput
-    data: XOR<SpecialUpdateWithoutFavtypeInput, SpecialUncheckedUpdateWithoutFavtypeInput>
-  }
-
-  export type SpecialUpdateManyWithWhereWithoutFavtypeInput = {
-    where: SpecialScalarWhereInput
-    data: XOR<SpecialUpdateManyMutationInput, SpecialUncheckedUpdateManyWithoutFavtypeInput>
-  }
-
-  export type SpecialCreateWithoutPlacesInput = {
-    name: string
-    type: string
-    poster?: string
-    foodorgroc: $Enums.FoodOrGroc
-    imagepath: string
-    from: string
-    till: string
-    before: number
-    after: number
-    placeNa: PlacesCreateNestedOneWithoutSpecialsByNameInput
-    favfoodname?: FavFoodCreateNestedManyWithoutFavfoodnameInput
-    favplacename?: FavFoodCreateNestedManyWithoutFavplacenameInput
-    favtype?: FavFoodCreateNestedManyWithoutFavtypeInput
-  }
-
-  export type SpecialUncheckedCreateWithoutPlacesInput = {
-    id?: number
-    name: string
-    type: string
-    poster?: string
-    foodorgroc: $Enums.FoodOrGroc
-    imagepath: string
-    from: string
-    till: string
-    before: number
-    after: number
-    PlaceName: string
-    favfoodname?: FavFoodUncheckedCreateNestedManyWithoutFavfoodnameInput
-    favplacename?: FavFoodUncheckedCreateNestedManyWithoutFavplacenameInput
-    favtype?: FavFoodUncheckedCreateNestedManyWithoutFavtypeInput
-  }
-
-  export type SpecialCreateOrConnectWithoutPlacesInput = {
-    where: SpecialWhereUniqueInput
-    create: XOR<SpecialCreateWithoutPlacesInput, SpecialUncheckedCreateWithoutPlacesInput>
-  }
-
-  export type SpecialCreateManyPlacesInputEnvelope = {
-    data: SpecialCreateManyPlacesInput | SpecialCreateManyPlacesInput[]
-    skipDuplicates?: boolean
-  }
-
   export type SpecialCreateWithoutPlaceNaInput = {
     name: string
     type: string
@@ -7739,9 +7696,9 @@ export namespace Prisma {
     before: number
     after: number
     places: PlacesCreateNestedOneWithoutSpecialsByIdInput
+    favtype?: FavFoodCreateNestedManyWithoutFavtypeInput
     favfoodname?: FavFoodCreateNestedManyWithoutFavfoodnameInput
     favplacename?: FavFoodCreateNestedManyWithoutFavplacenameInput
-    favtype?: FavFoodCreateNestedManyWithoutFavtypeInput
   }
 
   export type SpecialUncheckedCreateWithoutPlaceNaInput = {
@@ -7756,9 +7713,9 @@ export namespace Prisma {
     before: number
     after: number
     placesId: number
+    favtype?: FavFoodUncheckedCreateNestedManyWithoutFavtypeInput
     favfoodname?: FavFoodUncheckedCreateNestedManyWithoutFavfoodnameInput
     favplacename?: FavFoodUncheckedCreateNestedManyWithoutFavplacenameInput
-    favtype?: FavFoodUncheckedCreateNestedManyWithoutFavtypeInput
   }
 
   export type SpecialCreateOrConnectWithoutPlaceNaInput = {
@@ -7771,20 +7728,47 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SpecialUpsertWithWhereUniqueWithoutPlacesInput = {
+  export type SpecialCreateWithoutPlacesInput = {
+    name: string
+    type: string
+    poster?: string
+    foodorgroc: $Enums.FoodOrGroc
+    imagepath: string
+    from: string
+    till: string
+    before: number
+    after: number
+    placeNa: PlacesCreateNestedOneWithoutSpecialsByNameInput
+    favtype?: FavFoodCreateNestedManyWithoutFavtypeInput
+    favfoodname?: FavFoodCreateNestedManyWithoutFavfoodnameInput
+    favplacename?: FavFoodCreateNestedManyWithoutFavplacenameInput
+  }
+
+  export type SpecialUncheckedCreateWithoutPlacesInput = {
+    id?: number
+    name: string
+    type: string
+    poster?: string
+    foodorgroc: $Enums.FoodOrGroc
+    imagepath: string
+    from: string
+    till: string
+    before: number
+    after: number
+    PlaceName: string
+    favtype?: FavFoodUncheckedCreateNestedManyWithoutFavtypeInput
+    favfoodname?: FavFoodUncheckedCreateNestedManyWithoutFavfoodnameInput
+    favplacename?: FavFoodUncheckedCreateNestedManyWithoutFavplacenameInput
+  }
+
+  export type SpecialCreateOrConnectWithoutPlacesInput = {
     where: SpecialWhereUniqueInput
-    update: XOR<SpecialUpdateWithoutPlacesInput, SpecialUncheckedUpdateWithoutPlacesInput>
     create: XOR<SpecialCreateWithoutPlacesInput, SpecialUncheckedCreateWithoutPlacesInput>
   }
 
-  export type SpecialUpdateWithWhereUniqueWithoutPlacesInput = {
-    where: SpecialWhereUniqueInput
-    data: XOR<SpecialUpdateWithoutPlacesInput, SpecialUncheckedUpdateWithoutPlacesInput>
-  }
-
-  export type SpecialUpdateManyWithWhereWithoutPlacesInput = {
-    where: SpecialScalarWhereInput
-    data: XOR<SpecialUpdateManyMutationInput, SpecialUncheckedUpdateManyWithoutPlacesInput>
+  export type SpecialCreateManyPlacesInputEnvelope = {
+    data: SpecialCreateManyPlacesInput | SpecialCreateManyPlacesInput[]
+    skipDuplicates?: boolean
   }
 
   export type SpecialUpsertWithWhereUniqueWithoutPlaceNaInput = {
@@ -7803,26 +7787,20 @@ export namespace Prisma {
     data: XOR<SpecialUpdateManyMutationInput, SpecialUncheckedUpdateManyWithoutPlaceNaInput>
   }
 
-  export type PlacesCreateWithoutSpecialsByIdInput = {
-    name: string
-    location: string
-    type: string
-    imagepath: string
-    specialsByName?: SpecialCreateNestedManyWithoutPlaceNaInput
+  export type SpecialUpsertWithWhereUniqueWithoutPlacesInput = {
+    where: SpecialWhereUniqueInput
+    update: XOR<SpecialUpdateWithoutPlacesInput, SpecialUncheckedUpdateWithoutPlacesInput>
+    create: XOR<SpecialCreateWithoutPlacesInput, SpecialUncheckedCreateWithoutPlacesInput>
   }
 
-  export type PlacesUncheckedCreateWithoutSpecialsByIdInput = {
-    id?: number
-    name: string
-    location: string
-    type: string
-    imagepath: string
-    specialsByName?: SpecialUncheckedCreateNestedManyWithoutPlaceNaInput
+  export type SpecialUpdateWithWhereUniqueWithoutPlacesInput = {
+    where: SpecialWhereUniqueInput
+    data: XOR<SpecialUpdateWithoutPlacesInput, SpecialUncheckedUpdateWithoutPlacesInput>
   }
 
-  export type PlacesCreateOrConnectWithoutSpecialsByIdInput = {
-    where: PlacesWhereUniqueInput
-    create: XOR<PlacesCreateWithoutSpecialsByIdInput, PlacesUncheckedCreateWithoutSpecialsByIdInput>
+  export type SpecialUpdateManyWithWhereWithoutPlacesInput = {
+    where: SpecialScalarWhereInput
+    data: XOR<SpecialUpdateManyMutationInput, SpecialUncheckedUpdateManyWithoutPlacesInput>
   }
 
   export type PlacesCreateWithoutSpecialsByNameInput = {
@@ -7847,64 +7825,26 @@ export namespace Prisma {
     create: XOR<PlacesCreateWithoutSpecialsByNameInput, PlacesUncheckedCreateWithoutSpecialsByNameInput>
   }
 
-  export type FavFoodCreateWithoutFavfoodnameInput = {
-    type?: string | null
-    place?: string | null
-    ffoodname?: string | null
-    fplacename?: string | null
-    ffoodtype?: string | null
-    notified?: string | null
-    user: UserCreateNestedOneWithoutFavfoodsInput
-    favplacename?: SpecialCreateNestedManyWithoutFavplacenameInput
-    favtype?: SpecialCreateNestedManyWithoutFavtypeInput
+  export type PlacesCreateWithoutSpecialsByIdInput = {
+    name: string
+    location: string
+    type: string
+    imagepath: string
+    specialsByName?: SpecialCreateNestedManyWithoutPlaceNaInput
   }
 
-  export type FavFoodUncheckedCreateWithoutFavfoodnameInput = {
+  export type PlacesUncheckedCreateWithoutSpecialsByIdInput = {
     id?: number
-    type?: string | null
-    userId: number
-    place?: string | null
-    ffoodname?: string | null
-    fplacename?: string | null
-    ffoodtype?: string | null
-    notified?: string | null
-    favplacename?: SpecialUncheckedCreateNestedManyWithoutFavplacenameInput
-    favtype?: SpecialUncheckedCreateNestedManyWithoutFavtypeInput
+    name: string
+    location: string
+    type: string
+    imagepath: string
+    specialsByName?: SpecialUncheckedCreateNestedManyWithoutPlaceNaInput
   }
 
-  export type FavFoodCreateOrConnectWithoutFavfoodnameInput = {
-    where: FavFoodWhereUniqueInput
-    create: XOR<FavFoodCreateWithoutFavfoodnameInput, FavFoodUncheckedCreateWithoutFavfoodnameInput>
-  }
-
-  export type FavFoodCreateWithoutFavplacenameInput = {
-    type?: string | null
-    place?: string | null
-    ffoodname?: string | null
-    fplacename?: string | null
-    ffoodtype?: string | null
-    notified?: string | null
-    user: UserCreateNestedOneWithoutFavfoodsInput
-    favfoodname?: SpecialCreateNestedManyWithoutFavfoodnameInput
-    favtype?: SpecialCreateNestedManyWithoutFavtypeInput
-  }
-
-  export type FavFoodUncheckedCreateWithoutFavplacenameInput = {
-    id?: number
-    type?: string | null
-    userId: number
-    place?: string | null
-    ffoodname?: string | null
-    fplacename?: string | null
-    ffoodtype?: string | null
-    notified?: string | null
-    favfoodname?: SpecialUncheckedCreateNestedManyWithoutFavfoodnameInput
-    favtype?: SpecialUncheckedCreateNestedManyWithoutFavtypeInput
-  }
-
-  export type FavFoodCreateOrConnectWithoutFavplacenameInput = {
-    where: FavFoodWhereUniqueInput
-    create: XOR<FavFoodCreateWithoutFavplacenameInput, FavFoodUncheckedCreateWithoutFavplacenameInput>
+  export type PlacesCreateOrConnectWithoutSpecialsByIdInput = {
+    where: PlacesWhereUniqueInput
+    create: XOR<PlacesCreateWithoutSpecialsByIdInput, PlacesUncheckedCreateWithoutSpecialsByIdInput>
   }
 
   export type FavFoodCreateWithoutFavtypeInput = {
@@ -7937,32 +7877,64 @@ export namespace Prisma {
     create: XOR<FavFoodCreateWithoutFavtypeInput, FavFoodUncheckedCreateWithoutFavtypeInput>
   }
 
-  export type PlacesUpsertWithoutSpecialsByIdInput = {
-    update: XOR<PlacesUpdateWithoutSpecialsByIdInput, PlacesUncheckedUpdateWithoutSpecialsByIdInput>
-    create: XOR<PlacesCreateWithoutSpecialsByIdInput, PlacesUncheckedCreateWithoutSpecialsByIdInput>
-    where?: PlacesWhereInput
+  export type FavFoodCreateWithoutFavfoodnameInput = {
+    type?: string | null
+    place?: string | null
+    ffoodname?: string | null
+    fplacename?: string | null
+    ffoodtype?: string | null
+    notified?: string | null
+    user: UserCreateNestedOneWithoutFavfoodsInput
+    favtype?: SpecialCreateNestedManyWithoutFavtypeInput
+    favplacename?: SpecialCreateNestedManyWithoutFavplacenameInput
   }
 
-  export type PlacesUpdateToOneWithWhereWithoutSpecialsByIdInput = {
-    where?: PlacesWhereInput
-    data: XOR<PlacesUpdateWithoutSpecialsByIdInput, PlacesUncheckedUpdateWithoutSpecialsByIdInput>
+  export type FavFoodUncheckedCreateWithoutFavfoodnameInput = {
+    id?: number
+    type?: string | null
+    userId: number
+    place?: string | null
+    ffoodname?: string | null
+    fplacename?: string | null
+    ffoodtype?: string | null
+    notified?: string | null
+    favtype?: SpecialUncheckedCreateNestedManyWithoutFavtypeInput
+    favplacename?: SpecialUncheckedCreateNestedManyWithoutFavplacenameInput
   }
 
-  export type PlacesUpdateWithoutSpecialsByIdInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    location?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    imagepath?: StringFieldUpdateOperationsInput | string
-    specialsByName?: SpecialUpdateManyWithoutPlaceNaNestedInput
+  export type FavFoodCreateOrConnectWithoutFavfoodnameInput = {
+    where: FavFoodWhereUniqueInput
+    create: XOR<FavFoodCreateWithoutFavfoodnameInput, FavFoodUncheckedCreateWithoutFavfoodnameInput>
   }
 
-  export type PlacesUncheckedUpdateWithoutSpecialsByIdInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    location?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    imagepath?: StringFieldUpdateOperationsInput | string
-    specialsByName?: SpecialUncheckedUpdateManyWithoutPlaceNaNestedInput
+  export type FavFoodCreateWithoutFavplacenameInput = {
+    type?: string | null
+    place?: string | null
+    ffoodname?: string | null
+    fplacename?: string | null
+    ffoodtype?: string | null
+    notified?: string | null
+    user: UserCreateNestedOneWithoutFavfoodsInput
+    favtype?: SpecialCreateNestedManyWithoutFavtypeInput
+    favfoodname?: SpecialCreateNestedManyWithoutFavfoodnameInput
+  }
+
+  export type FavFoodUncheckedCreateWithoutFavplacenameInput = {
+    id?: number
+    type?: string | null
+    userId: number
+    place?: string | null
+    ffoodname?: string | null
+    fplacename?: string | null
+    ffoodtype?: string | null
+    notified?: string | null
+    favtype?: SpecialUncheckedCreateNestedManyWithoutFavtypeInput
+    favfoodname?: SpecialUncheckedCreateNestedManyWithoutFavfoodnameInput
+  }
+
+  export type FavFoodCreateOrConnectWithoutFavplacenameInput = {
+    where: FavFoodWhereUniqueInput
+    create: XOR<FavFoodCreateWithoutFavplacenameInput, FavFoodUncheckedCreateWithoutFavplacenameInput>
   }
 
   export type PlacesUpsertWithoutSpecialsByNameInput = {
@@ -7991,6 +7963,50 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     imagepath?: StringFieldUpdateOperationsInput | string
     specialsById?: SpecialUncheckedUpdateManyWithoutPlacesNestedInput
+  }
+
+  export type PlacesUpsertWithoutSpecialsByIdInput = {
+    update: XOR<PlacesUpdateWithoutSpecialsByIdInput, PlacesUncheckedUpdateWithoutSpecialsByIdInput>
+    create: XOR<PlacesCreateWithoutSpecialsByIdInput, PlacesUncheckedCreateWithoutSpecialsByIdInput>
+    where?: PlacesWhereInput
+  }
+
+  export type PlacesUpdateToOneWithWhereWithoutSpecialsByIdInput = {
+    where?: PlacesWhereInput
+    data: XOR<PlacesUpdateWithoutSpecialsByIdInput, PlacesUncheckedUpdateWithoutSpecialsByIdInput>
+  }
+
+  export type PlacesUpdateWithoutSpecialsByIdInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    imagepath?: StringFieldUpdateOperationsInput | string
+    specialsByName?: SpecialUpdateManyWithoutPlaceNaNestedInput
+  }
+
+  export type PlacesUncheckedUpdateWithoutSpecialsByIdInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    imagepath?: StringFieldUpdateOperationsInput | string
+    specialsByName?: SpecialUncheckedUpdateManyWithoutPlaceNaNestedInput
+  }
+
+  export type FavFoodUpsertWithWhereUniqueWithoutFavtypeInput = {
+    where: FavFoodWhereUniqueInput
+    update: XOR<FavFoodUpdateWithoutFavtypeInput, FavFoodUncheckedUpdateWithoutFavtypeInput>
+    create: XOR<FavFoodCreateWithoutFavtypeInput, FavFoodUncheckedCreateWithoutFavtypeInput>
+  }
+
+  export type FavFoodUpdateWithWhereUniqueWithoutFavtypeInput = {
+    where: FavFoodWhereUniqueInput
+    data: XOR<FavFoodUpdateWithoutFavtypeInput, FavFoodUncheckedUpdateWithoutFavtypeInput>
+  }
+
+  export type FavFoodUpdateManyWithWhereWithoutFavtypeInput = {
+    where: FavFoodScalarWhereInput
+    data: XOR<FavFoodUpdateManyMutationInput, FavFoodUncheckedUpdateManyWithoutFavtypeInput>
   }
 
   export type FavFoodUpsertWithWhereUniqueWithoutFavfoodnameInput = {
@@ -8025,22 +8041,6 @@ export namespace Prisma {
     data: XOR<FavFoodUpdateManyMutationInput, FavFoodUncheckedUpdateManyWithoutFavplacenameInput>
   }
 
-  export type FavFoodUpsertWithWhereUniqueWithoutFavtypeInput = {
-    where: FavFoodWhereUniqueInput
-    update: XOR<FavFoodUpdateWithoutFavtypeInput, FavFoodUncheckedUpdateWithoutFavtypeInput>
-    create: XOR<FavFoodCreateWithoutFavtypeInput, FavFoodUncheckedCreateWithoutFavtypeInput>
-  }
-
-  export type FavFoodUpdateWithWhereUniqueWithoutFavtypeInput = {
-    where: FavFoodWhereUniqueInput
-    data: XOR<FavFoodUpdateWithoutFavtypeInput, FavFoodUncheckedUpdateWithoutFavtypeInput>
-  }
-
-  export type FavFoodUpdateManyWithWhereWithoutFavtypeInput = {
-    where: FavFoodScalarWhereInput
-    data: XOR<FavFoodUpdateManyMutationInput, FavFoodUncheckedUpdateManyWithoutFavtypeInput>
-  }
-
   export type FavFoodCreateManyUserInput = {
     id?: number
     type?: string | null
@@ -8058,9 +8058,9 @@ export namespace Prisma {
     fplacename?: NullableStringFieldUpdateOperationsInput | string | null
     ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
     notified?: NullableStringFieldUpdateOperationsInput | string | null
+    favtype?: SpecialUpdateManyWithoutFavtypeNestedInput
     favfoodname?: SpecialUpdateManyWithoutFavfoodnameNestedInput
     favplacename?: SpecialUpdateManyWithoutFavplacenameNestedInput
-    favtype?: SpecialUpdateManyWithoutFavtypeNestedInput
   }
 
   export type FavFoodUncheckedUpdateWithoutUserInput = {
@@ -8071,9 +8071,9 @@ export namespace Prisma {
     fplacename?: NullableStringFieldUpdateOperationsInput | string | null
     ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
     notified?: NullableStringFieldUpdateOperationsInput | string | null
+    favtype?: SpecialUncheckedUpdateManyWithoutFavtypeNestedInput
     favfoodname?: SpecialUncheckedUpdateManyWithoutFavfoodnameNestedInput
     favplacename?: SpecialUncheckedUpdateManyWithoutFavplacenameNestedInput
-    favtype?: SpecialUncheckedUpdateManyWithoutFavtypeNestedInput
   }
 
   export type FavFoodUncheckedUpdateManyWithoutUserInput = {
@@ -8086,102 +8086,6 @@ export namespace Prisma {
     notified?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type SpecialUpdateWithoutFavfoodnameInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    poster?: StringFieldUpdateOperationsInput | string
-    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
-    imagepath?: StringFieldUpdateOperationsInput | string
-    from?: StringFieldUpdateOperationsInput | string
-    till?: StringFieldUpdateOperationsInput | string
-    before?: FloatFieldUpdateOperationsInput | number
-    after?: FloatFieldUpdateOperationsInput | number
-    places?: PlacesUpdateOneRequiredWithoutSpecialsByIdNestedInput
-    placeNa?: PlacesUpdateOneRequiredWithoutSpecialsByNameNestedInput
-    favplacename?: FavFoodUpdateManyWithoutFavplacenameNestedInput
-    favtype?: FavFoodUpdateManyWithoutFavtypeNestedInput
-  }
-
-  export type SpecialUncheckedUpdateWithoutFavfoodnameInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    poster?: StringFieldUpdateOperationsInput | string
-    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
-    imagepath?: StringFieldUpdateOperationsInput | string
-    from?: StringFieldUpdateOperationsInput | string
-    till?: StringFieldUpdateOperationsInput | string
-    before?: FloatFieldUpdateOperationsInput | number
-    after?: FloatFieldUpdateOperationsInput | number
-    placesId?: IntFieldUpdateOperationsInput | number
-    PlaceName?: StringFieldUpdateOperationsInput | string
-    favplacename?: FavFoodUncheckedUpdateManyWithoutFavplacenameNestedInput
-    favtype?: FavFoodUncheckedUpdateManyWithoutFavtypeNestedInput
-  }
-
-  export type SpecialUncheckedUpdateManyWithoutFavfoodnameInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    poster?: StringFieldUpdateOperationsInput | string
-    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
-    imagepath?: StringFieldUpdateOperationsInput | string
-    from?: StringFieldUpdateOperationsInput | string
-    till?: StringFieldUpdateOperationsInput | string
-    before?: FloatFieldUpdateOperationsInput | number
-    after?: FloatFieldUpdateOperationsInput | number
-    placesId?: IntFieldUpdateOperationsInput | number
-    PlaceName?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type SpecialUpdateWithoutFavplacenameInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    poster?: StringFieldUpdateOperationsInput | string
-    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
-    imagepath?: StringFieldUpdateOperationsInput | string
-    from?: StringFieldUpdateOperationsInput | string
-    till?: StringFieldUpdateOperationsInput | string
-    before?: FloatFieldUpdateOperationsInput | number
-    after?: FloatFieldUpdateOperationsInput | number
-    places?: PlacesUpdateOneRequiredWithoutSpecialsByIdNestedInput
-    placeNa?: PlacesUpdateOneRequiredWithoutSpecialsByNameNestedInput
-    favfoodname?: FavFoodUpdateManyWithoutFavfoodnameNestedInput
-    favtype?: FavFoodUpdateManyWithoutFavtypeNestedInput
-  }
-
-  export type SpecialUncheckedUpdateWithoutFavplacenameInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    poster?: StringFieldUpdateOperationsInput | string
-    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
-    imagepath?: StringFieldUpdateOperationsInput | string
-    from?: StringFieldUpdateOperationsInput | string
-    till?: StringFieldUpdateOperationsInput | string
-    before?: FloatFieldUpdateOperationsInput | number
-    after?: FloatFieldUpdateOperationsInput | number
-    placesId?: IntFieldUpdateOperationsInput | number
-    PlaceName?: StringFieldUpdateOperationsInput | string
-    favfoodname?: FavFoodUncheckedUpdateManyWithoutFavfoodnameNestedInput
-    favtype?: FavFoodUncheckedUpdateManyWithoutFavtypeNestedInput
-  }
-
-  export type SpecialUncheckedUpdateManyWithoutFavplacenameInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    poster?: StringFieldUpdateOperationsInput | string
-    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
-    imagepath?: StringFieldUpdateOperationsInput | string
-    from?: StringFieldUpdateOperationsInput | string
-    till?: StringFieldUpdateOperationsInput | string
-    before?: FloatFieldUpdateOperationsInput | number
-    after?: FloatFieldUpdateOperationsInput | number
-    placesId?: IntFieldUpdateOperationsInput | number
-    PlaceName?: StringFieldUpdateOperationsInput | string
-  }
-
   export type SpecialUpdateWithoutFavtypeInput = {
     name?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
@@ -8192,8 +8096,8 @@ export namespace Prisma {
     till?: StringFieldUpdateOperationsInput | string
     before?: FloatFieldUpdateOperationsInput | number
     after?: FloatFieldUpdateOperationsInput | number
-    places?: PlacesUpdateOneRequiredWithoutSpecialsByIdNestedInput
     placeNa?: PlacesUpdateOneRequiredWithoutSpecialsByNameNestedInput
+    places?: PlacesUpdateOneRequiredWithoutSpecialsByIdNestedInput
     favfoodname?: FavFoodUpdateManyWithoutFavfoodnameNestedInput
     favplacename?: FavFoodUpdateManyWithoutFavplacenameNestedInput
   }
@@ -8230,18 +8134,100 @@ export namespace Prisma {
     PlaceName?: StringFieldUpdateOperationsInput | string
   }
 
-  export type SpecialCreateManyPlacesInput = {
-    id?: number
-    name: string
-    type: string
-    poster?: string
-    foodorgroc: $Enums.FoodOrGroc
-    imagepath: string
-    from: string
-    till: string
-    before: number
-    after: number
-    PlaceName: string
+  export type SpecialUpdateWithoutFavfoodnameInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    poster?: StringFieldUpdateOperationsInput | string
+    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
+    imagepath?: StringFieldUpdateOperationsInput | string
+    from?: StringFieldUpdateOperationsInput | string
+    till?: StringFieldUpdateOperationsInput | string
+    before?: FloatFieldUpdateOperationsInput | number
+    after?: FloatFieldUpdateOperationsInput | number
+    placeNa?: PlacesUpdateOneRequiredWithoutSpecialsByNameNestedInput
+    places?: PlacesUpdateOneRequiredWithoutSpecialsByIdNestedInput
+    favtype?: FavFoodUpdateManyWithoutFavtypeNestedInput
+    favplacename?: FavFoodUpdateManyWithoutFavplacenameNestedInput
+  }
+
+  export type SpecialUncheckedUpdateWithoutFavfoodnameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    poster?: StringFieldUpdateOperationsInput | string
+    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
+    imagepath?: StringFieldUpdateOperationsInput | string
+    from?: StringFieldUpdateOperationsInput | string
+    till?: StringFieldUpdateOperationsInput | string
+    before?: FloatFieldUpdateOperationsInput | number
+    after?: FloatFieldUpdateOperationsInput | number
+    placesId?: IntFieldUpdateOperationsInput | number
+    PlaceName?: StringFieldUpdateOperationsInput | string
+    favtype?: FavFoodUncheckedUpdateManyWithoutFavtypeNestedInput
+    favplacename?: FavFoodUncheckedUpdateManyWithoutFavplacenameNestedInput
+  }
+
+  export type SpecialUncheckedUpdateManyWithoutFavfoodnameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    poster?: StringFieldUpdateOperationsInput | string
+    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
+    imagepath?: StringFieldUpdateOperationsInput | string
+    from?: StringFieldUpdateOperationsInput | string
+    till?: StringFieldUpdateOperationsInput | string
+    before?: FloatFieldUpdateOperationsInput | number
+    after?: FloatFieldUpdateOperationsInput | number
+    placesId?: IntFieldUpdateOperationsInput | number
+    PlaceName?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SpecialUpdateWithoutFavplacenameInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    poster?: StringFieldUpdateOperationsInput | string
+    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
+    imagepath?: StringFieldUpdateOperationsInput | string
+    from?: StringFieldUpdateOperationsInput | string
+    till?: StringFieldUpdateOperationsInput | string
+    before?: FloatFieldUpdateOperationsInput | number
+    after?: FloatFieldUpdateOperationsInput | number
+    placeNa?: PlacesUpdateOneRequiredWithoutSpecialsByNameNestedInput
+    places?: PlacesUpdateOneRequiredWithoutSpecialsByIdNestedInput
+    favtype?: FavFoodUpdateManyWithoutFavtypeNestedInput
+    favfoodname?: FavFoodUpdateManyWithoutFavfoodnameNestedInput
+  }
+
+  export type SpecialUncheckedUpdateWithoutFavplacenameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    poster?: StringFieldUpdateOperationsInput | string
+    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
+    imagepath?: StringFieldUpdateOperationsInput | string
+    from?: StringFieldUpdateOperationsInput | string
+    till?: StringFieldUpdateOperationsInput | string
+    before?: FloatFieldUpdateOperationsInput | number
+    after?: FloatFieldUpdateOperationsInput | number
+    placesId?: IntFieldUpdateOperationsInput | number
+    PlaceName?: StringFieldUpdateOperationsInput | string
+    favtype?: FavFoodUncheckedUpdateManyWithoutFavtypeNestedInput
+    favfoodname?: FavFoodUncheckedUpdateManyWithoutFavfoodnameNestedInput
+  }
+
+  export type SpecialUncheckedUpdateManyWithoutFavplacenameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    poster?: StringFieldUpdateOperationsInput | string
+    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
+    imagepath?: StringFieldUpdateOperationsInput | string
+    from?: StringFieldUpdateOperationsInput | string
+    till?: StringFieldUpdateOperationsInput | string
+    before?: FloatFieldUpdateOperationsInput | number
+    after?: FloatFieldUpdateOperationsInput | number
+    placesId?: IntFieldUpdateOperationsInput | number
+    PlaceName?: StringFieldUpdateOperationsInput | string
   }
 
   export type SpecialCreateManyPlaceNaInput = {
@@ -8258,51 +8244,18 @@ export namespace Prisma {
     placesId: number
   }
 
-  export type SpecialUpdateWithoutPlacesInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    poster?: StringFieldUpdateOperationsInput | string
-    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
-    imagepath?: StringFieldUpdateOperationsInput | string
-    from?: StringFieldUpdateOperationsInput | string
-    till?: StringFieldUpdateOperationsInput | string
-    before?: FloatFieldUpdateOperationsInput | number
-    after?: FloatFieldUpdateOperationsInput | number
-    placeNa?: PlacesUpdateOneRequiredWithoutSpecialsByNameNestedInput
-    favfoodname?: FavFoodUpdateManyWithoutFavfoodnameNestedInput
-    favplacename?: FavFoodUpdateManyWithoutFavplacenameNestedInput
-    favtype?: FavFoodUpdateManyWithoutFavtypeNestedInput
-  }
-
-  export type SpecialUncheckedUpdateWithoutPlacesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    poster?: StringFieldUpdateOperationsInput | string
-    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
-    imagepath?: StringFieldUpdateOperationsInput | string
-    from?: StringFieldUpdateOperationsInput | string
-    till?: StringFieldUpdateOperationsInput | string
-    before?: FloatFieldUpdateOperationsInput | number
-    after?: FloatFieldUpdateOperationsInput | number
-    PlaceName?: StringFieldUpdateOperationsInput | string
-    favfoodname?: FavFoodUncheckedUpdateManyWithoutFavfoodnameNestedInput
-    favplacename?: FavFoodUncheckedUpdateManyWithoutFavplacenameNestedInput
-    favtype?: FavFoodUncheckedUpdateManyWithoutFavtypeNestedInput
-  }
-
-  export type SpecialUncheckedUpdateManyWithoutPlacesInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    poster?: StringFieldUpdateOperationsInput | string
-    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
-    imagepath?: StringFieldUpdateOperationsInput | string
-    from?: StringFieldUpdateOperationsInput | string
-    till?: StringFieldUpdateOperationsInput | string
-    before?: FloatFieldUpdateOperationsInput | number
-    after?: FloatFieldUpdateOperationsInput | number
-    PlaceName?: StringFieldUpdateOperationsInput | string
+  export type SpecialCreateManyPlacesInput = {
+    id?: number
+    name: string
+    type: string
+    poster?: string
+    foodorgroc: $Enums.FoodOrGroc
+    imagepath: string
+    from: string
+    till: string
+    before: number
+    after: number
+    PlaceName: string
   }
 
   export type SpecialUpdateWithoutPlaceNaInput = {
@@ -8316,9 +8269,9 @@ export namespace Prisma {
     before?: FloatFieldUpdateOperationsInput | number
     after?: FloatFieldUpdateOperationsInput | number
     places?: PlacesUpdateOneRequiredWithoutSpecialsByIdNestedInput
+    favtype?: FavFoodUpdateManyWithoutFavtypeNestedInput
     favfoodname?: FavFoodUpdateManyWithoutFavfoodnameNestedInput
     favplacename?: FavFoodUpdateManyWithoutFavplacenameNestedInput
-    favtype?: FavFoodUpdateManyWithoutFavtypeNestedInput
   }
 
   export type SpecialUncheckedUpdateWithoutPlaceNaInput = {
@@ -8333,9 +8286,9 @@ export namespace Prisma {
     before?: FloatFieldUpdateOperationsInput | number
     after?: FloatFieldUpdateOperationsInput | number
     placesId?: IntFieldUpdateOperationsInput | number
+    favtype?: FavFoodUncheckedUpdateManyWithoutFavtypeNestedInput
     favfoodname?: FavFoodUncheckedUpdateManyWithoutFavfoodnameNestedInput
     favplacename?: FavFoodUncheckedUpdateManyWithoutFavplacenameNestedInput
-    favtype?: FavFoodUncheckedUpdateManyWithoutFavtypeNestedInput
   }
 
   export type SpecialUncheckedUpdateManyWithoutPlaceNaInput = {
@@ -8352,76 +8305,51 @@ export namespace Prisma {
     placesId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type FavFoodUpdateWithoutFavfoodnameInput = {
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    place?: NullableStringFieldUpdateOperationsInput | string | null
-    ffoodname?: NullableStringFieldUpdateOperationsInput | string | null
-    fplacename?: NullableStringFieldUpdateOperationsInput | string | null
-    ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
-    notified?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutFavfoodsNestedInput
-    favplacename?: SpecialUpdateManyWithoutFavplacenameNestedInput
-    favtype?: SpecialUpdateManyWithoutFavtypeNestedInput
+  export type SpecialUpdateWithoutPlacesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    poster?: StringFieldUpdateOperationsInput | string
+    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
+    imagepath?: StringFieldUpdateOperationsInput | string
+    from?: StringFieldUpdateOperationsInput | string
+    till?: StringFieldUpdateOperationsInput | string
+    before?: FloatFieldUpdateOperationsInput | number
+    after?: FloatFieldUpdateOperationsInput | number
+    placeNa?: PlacesUpdateOneRequiredWithoutSpecialsByNameNestedInput
+    favtype?: FavFoodUpdateManyWithoutFavtypeNestedInput
+    favfoodname?: FavFoodUpdateManyWithoutFavfoodnameNestedInput
+    favplacename?: FavFoodUpdateManyWithoutFavplacenameNestedInput
   }
 
-  export type FavFoodUncheckedUpdateWithoutFavfoodnameInput = {
+  export type SpecialUncheckedUpdateWithoutPlacesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: IntFieldUpdateOperationsInput | number
-    place?: NullableStringFieldUpdateOperationsInput | string | null
-    ffoodname?: NullableStringFieldUpdateOperationsInput | string | null
-    fplacename?: NullableStringFieldUpdateOperationsInput | string | null
-    ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
-    notified?: NullableStringFieldUpdateOperationsInput | string | null
-    favplacename?: SpecialUncheckedUpdateManyWithoutFavplacenameNestedInput
-    favtype?: SpecialUncheckedUpdateManyWithoutFavtypeNestedInput
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    poster?: StringFieldUpdateOperationsInput | string
+    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
+    imagepath?: StringFieldUpdateOperationsInput | string
+    from?: StringFieldUpdateOperationsInput | string
+    till?: StringFieldUpdateOperationsInput | string
+    before?: FloatFieldUpdateOperationsInput | number
+    after?: FloatFieldUpdateOperationsInput | number
+    PlaceName?: StringFieldUpdateOperationsInput | string
+    favtype?: FavFoodUncheckedUpdateManyWithoutFavtypeNestedInput
+    favfoodname?: FavFoodUncheckedUpdateManyWithoutFavfoodnameNestedInput
+    favplacename?: FavFoodUncheckedUpdateManyWithoutFavplacenameNestedInput
   }
 
-  export type FavFoodUncheckedUpdateManyWithoutFavfoodnameInput = {
+  export type SpecialUncheckedUpdateManyWithoutPlacesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: IntFieldUpdateOperationsInput | number
-    place?: NullableStringFieldUpdateOperationsInput | string | null
-    ffoodname?: NullableStringFieldUpdateOperationsInput | string | null
-    fplacename?: NullableStringFieldUpdateOperationsInput | string | null
-    ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
-    notified?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type FavFoodUpdateWithoutFavplacenameInput = {
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    place?: NullableStringFieldUpdateOperationsInput | string | null
-    ffoodname?: NullableStringFieldUpdateOperationsInput | string | null
-    fplacename?: NullableStringFieldUpdateOperationsInput | string | null
-    ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
-    notified?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutFavfoodsNestedInput
-    favfoodname?: SpecialUpdateManyWithoutFavfoodnameNestedInput
-    favtype?: SpecialUpdateManyWithoutFavtypeNestedInput
-  }
-
-  export type FavFoodUncheckedUpdateWithoutFavplacenameInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: IntFieldUpdateOperationsInput | number
-    place?: NullableStringFieldUpdateOperationsInput | string | null
-    ffoodname?: NullableStringFieldUpdateOperationsInput | string | null
-    fplacename?: NullableStringFieldUpdateOperationsInput | string | null
-    ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
-    notified?: NullableStringFieldUpdateOperationsInput | string | null
-    favfoodname?: SpecialUncheckedUpdateManyWithoutFavfoodnameNestedInput
-    favtype?: SpecialUncheckedUpdateManyWithoutFavtypeNestedInput
-  }
-
-  export type FavFoodUncheckedUpdateManyWithoutFavplacenameInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: IntFieldUpdateOperationsInput | number
-    place?: NullableStringFieldUpdateOperationsInput | string | null
-    ffoodname?: NullableStringFieldUpdateOperationsInput | string | null
-    fplacename?: NullableStringFieldUpdateOperationsInput | string | null
-    ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
-    notified?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    poster?: StringFieldUpdateOperationsInput | string
+    foodorgroc?: EnumFoodOrGrocFieldUpdateOperationsInput | $Enums.FoodOrGroc
+    imagepath?: StringFieldUpdateOperationsInput | string
+    from?: StringFieldUpdateOperationsInput | string
+    till?: StringFieldUpdateOperationsInput | string
+    before?: FloatFieldUpdateOperationsInput | number
+    after?: FloatFieldUpdateOperationsInput | number
+    PlaceName?: StringFieldUpdateOperationsInput | string
   }
 
   export type FavFoodUpdateWithoutFavtypeInput = {
@@ -8450,6 +8378,78 @@ export namespace Prisma {
   }
 
   export type FavFoodUncheckedUpdateManyWithoutFavtypeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: IntFieldUpdateOperationsInput | number
+    place?: NullableStringFieldUpdateOperationsInput | string | null
+    ffoodname?: NullableStringFieldUpdateOperationsInput | string | null
+    fplacename?: NullableStringFieldUpdateOperationsInput | string | null
+    ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
+    notified?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FavFoodUpdateWithoutFavfoodnameInput = {
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    place?: NullableStringFieldUpdateOperationsInput | string | null
+    ffoodname?: NullableStringFieldUpdateOperationsInput | string | null
+    fplacename?: NullableStringFieldUpdateOperationsInput | string | null
+    ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
+    notified?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneRequiredWithoutFavfoodsNestedInput
+    favtype?: SpecialUpdateManyWithoutFavtypeNestedInput
+    favplacename?: SpecialUpdateManyWithoutFavplacenameNestedInput
+  }
+
+  export type FavFoodUncheckedUpdateWithoutFavfoodnameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: IntFieldUpdateOperationsInput | number
+    place?: NullableStringFieldUpdateOperationsInput | string | null
+    ffoodname?: NullableStringFieldUpdateOperationsInput | string | null
+    fplacename?: NullableStringFieldUpdateOperationsInput | string | null
+    ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
+    notified?: NullableStringFieldUpdateOperationsInput | string | null
+    favtype?: SpecialUncheckedUpdateManyWithoutFavtypeNestedInput
+    favplacename?: SpecialUncheckedUpdateManyWithoutFavplacenameNestedInput
+  }
+
+  export type FavFoodUncheckedUpdateManyWithoutFavfoodnameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: IntFieldUpdateOperationsInput | number
+    place?: NullableStringFieldUpdateOperationsInput | string | null
+    ffoodname?: NullableStringFieldUpdateOperationsInput | string | null
+    fplacename?: NullableStringFieldUpdateOperationsInput | string | null
+    ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
+    notified?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type FavFoodUpdateWithoutFavplacenameInput = {
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    place?: NullableStringFieldUpdateOperationsInput | string | null
+    ffoodname?: NullableStringFieldUpdateOperationsInput | string | null
+    fplacename?: NullableStringFieldUpdateOperationsInput | string | null
+    ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
+    notified?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: UserUpdateOneRequiredWithoutFavfoodsNestedInput
+    favtype?: SpecialUpdateManyWithoutFavtypeNestedInput
+    favfoodname?: SpecialUpdateManyWithoutFavfoodnameNestedInput
+  }
+
+  export type FavFoodUncheckedUpdateWithoutFavplacenameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: IntFieldUpdateOperationsInput | number
+    place?: NullableStringFieldUpdateOperationsInput | string | null
+    ffoodname?: NullableStringFieldUpdateOperationsInput | string | null
+    fplacename?: NullableStringFieldUpdateOperationsInput | string | null
+    ffoodtype?: NullableStringFieldUpdateOperationsInput | string | null
+    notified?: NullableStringFieldUpdateOperationsInput | string | null
+    favtype?: SpecialUncheckedUpdateManyWithoutFavtypeNestedInput
+    favfoodname?: SpecialUncheckedUpdateManyWithoutFavfoodnameNestedInput
+  }
+
+  export type FavFoodUncheckedUpdateManyWithoutFavplacenameInput = {
     id?: IntFieldUpdateOperationsInput | number
     type?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: IntFieldUpdateOperationsInput | number

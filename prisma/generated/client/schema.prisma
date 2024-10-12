@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "./generated/client"
@@ -11,35 +5,33 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://userdatabase_owner:UOdsD0H2wnIB@ep-curly-star-a5eu5l03.us-east-2.aws.neon.tech/userdatabase"
 }
 
 model User {
   id           Int       @id @default(autoincrement())
-  name         String    @default("Unknown") // Default value for existing rows
+  name         String    @default("Unknown")
   email        String    @unique
   role         Userroles @default(User)
   password     String
-  refreshToken String?   @db.Text // Allow large refresh tokens
-  subscription Json? // Store the subscription as JSON
+  refreshToken String?
+  subscription Json?
   favfoods     FavFood[]
 }
 
 model FavFood {
-  id         Int     @id @default(autoincrement())
-  type       String?
-  user       User    @relation(fields: [userId], references: [id])
-  userId     Int
-  place      String?
-  ffoodname  String?
-  fplacename String?
-  ffoodtype  String?
-  notified   String? @default("not yet")
-
-  // Relations to Special model
-  favfoodname  Special[] @relation("foodbyname", map: "FavFood_FoodByName_fkey")
-  favplacename Special[] @relation("placebyname", map: "FavFood_PlaceByName_fkey")
-  favtype      Special[] @relation("favbytype", map: "FavFood_FavByType_fkey")
+  id           Int       @id @default(autoincrement())
+  type         String?
+  userId       Int
+  place        String?
+  ffoodname    String?
+  fplacename   String?
+  ffoodtype    String?
+  notified     String?   @default("not yet")
+  user         User      @relation(fields: [userId], references: [id])
+  favtype      Special[] @relation("favbytype")
+  favfoodname  Special[] @relation("foodbyname")
+  favplacename Special[] @relation("placebyname")
 }
 
 model Places {
@@ -48,30 +40,28 @@ model Places {
   location       String
   type           String
   imagepath      String
-  specialsById   Special[] @relation("PlaceById") // Relation by ID
-  specialsByName Special[] @relation("PlaceByName") // Relation by Name
+  specialsByName Special[] @relation("PlaceByName")
+  specialsById   Special[] @relation("PlaceById")
 }
 
 model Special {
-  id         Int        @id @default(autoincrement())
-  name       String
-  type       String
-  poster     String     @default("beforetime")
-  foodorgroc FoodOrGroc
-  imagepath  String
-  from       String
-  till       String
-  before     Float
-  after      Float
-  placesId   Int
-  places     Places     @relation("PlaceById", fields: [placesId], references: [id]) // Relation by ID
-  PlaceName  String
-  placeNa    Places     @relation("PlaceByName", fields: [PlaceName], references: [name]) // Relation by name
-
-  // Inverse relations for FavFood
-  favfoodname  FavFood[] @relation("foodbyname")
-  favplacename FavFood[] @relation("placebyname")
-  favtype      FavFood[] @relation("favbytype")
+  id           Int        @id @default(autoincrement())
+  name         String
+  type         String
+  poster       String     @default("beforetime")
+  foodorgroc   FoodOrGroc
+  imagepath    String
+  from         String
+  till         String
+  before       Float
+  after        Float
+  placesId     Int
+  PlaceName    String
+  placeNa      Places     @relation("PlaceByName", fields: [PlaceName], references: [name])
+  places       Places     @relation("PlaceById", fields: [placesId], references: [id])
+  favtype      FavFood[]  @relation("favbytype")
+  favfoodname  FavFood[]  @relation("foodbyname")
+  favplacename FavFood[]  @relation("placebyname")
 }
 
 enum Userroles {
