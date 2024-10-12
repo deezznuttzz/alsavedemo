@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     typescript: {
-      ignoreBuildErrors: true, // Skip TypeScript checks during build for faster builds
+      ignoreBuildErrors: true, // Optional: Skips TypeScript errors during builds
     },
-    experimental: {
-      turboMode: true, // Enable Turbopack (faster builds)
-    },
-    outputFileTracing: true, // Cache server-related files for efficiency
+    outputFileTracing: true, // Helps cache server-side files
   };
   
   export default nextConfig;
+  
