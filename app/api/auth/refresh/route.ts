@@ -29,7 +29,8 @@ export async function POST() {
     const accessToken = signAccessToken({ id: user.id, email: user.email });
 
     return NextResponse.json({ accessToken });
-  } catch (error) {
-    return NextResponse.json({ error: 'Invalid refresh token' }, { status: 403 });
+  } catch (err) {
+    console.error('Error verifying refresh token:', err);
+    return NextResponse.json({ error: 'Invalid refresh token' }, { status: 500 });
   }
 }

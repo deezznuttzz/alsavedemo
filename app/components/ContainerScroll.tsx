@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import React from "react";
-import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
+import { motion, MotionValue } from "framer-motion"; // Removed unused imports
 
 export const Card = ({
   rotate,

@@ -4,16 +4,15 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import FavFoodButton from './FavFoodButton';
 import FavTypeButton from './FavTypeButton';
+import Image from 'next/image';
 
 interface MyAlSaveItemProps {
   name: string;
   type: string;
   place: string;
-  placename: string;
   foodorgroc: string;
   before?: number;
   after: number;
-  from: string;
   till: string;
   imagepath?: string;
 }
@@ -22,11 +21,9 @@ export default function MyAlSaveItem({
   name,
   type,
   place,
-  placename,
   before,
   after,
   till,
-  from,
   imagepath,
 }: MyAlSaveItemProps) {
   const [userId, setUserId] = useState<number | null>(null);
@@ -48,12 +45,15 @@ export default function MyAlSaveItem({
       transition={{ type: 'spring', stiffness: 300 }}
     >
       {imagepath && (
-        <img
-          src={imagepath}
-          alt={name}
-          className="w-200 max-h-[150px] object-contain rounded-t-lg"
-        />
-      )}
+  <Image
+    src={imagepath}
+    alt={name}
+    width={200}
+    height={150}
+    className="object-contain rounded-t-lg"
+  />
+)}
+     
       <div className="p-2">
         <h3 className="text-lg font-semibold">
           {name}
