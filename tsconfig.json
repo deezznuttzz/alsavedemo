@@ -4,6 +4,8 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+ // This makes TypeScript only re-check what changed.
+    "tsBuildInfoFile": ".next/cache/tsbuildinfo.json", // Save the cache inside `.next/`
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
