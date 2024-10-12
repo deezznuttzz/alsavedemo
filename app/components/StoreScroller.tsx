@@ -2,10 +2,10 @@
 import React from 'react';
 import AlSaveItem from './AlSaveItem'; // Adjust the path if necessary
 
-interface AlSaveItem {
-  name: string;       // Special name
+interface AlSaveItemProps {
+  name: string;
   type: string;
-  place: string;      // Store name
+  place: string;
   foodorgroc: string;
   from: string;
   till: string;
@@ -15,28 +15,24 @@ interface AlSaveItem {
 }
 
 interface StoreScrollerProps {
-  place: string;  // This is the place (store name) for the header
-  specials: AlSaveItem[];
+  place: string;
+  specials: AlSaveItemProps[];
 }
 
 export default function StoreScroller({ place, specials }: StoreScrollerProps) {
   return (
     <div className="mb-8">
-      <h2 className="text-lg font-bold mb-2">{place}</h2> {/* Place name in the header */}
+      <h2 className="text-lg font-bold mb-2">{place}</h2>
       <div className="flex overflow-x-auto space-x-4 scrollbar-thin scrollbar-thumb-gray-500">
         {specials.map((special, index) => (
-          <div
-            key={index}
-            className="min-w-[200px] flex-shrink-0" // Prevents flex items from stretching
-          >
+          <div key={index} className="min-w-[200px] flex-shrink-0">
             <AlSaveItem
-              name={special.name} // Special name in the card
+              name={special.name}
               type={special.type}
-              placename={special.name}
+              place={special.place}  // Pass the place to AlSaveItem
               foodorgroc={special.foodorgroc}
               from={special.from}
               till={special.till}
-              place={special.place} // Store name passed but not displayed on the card
               before={special.before}
               after={special.after}
               imagepath={special.imagepath}

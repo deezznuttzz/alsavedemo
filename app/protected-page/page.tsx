@@ -1,11 +1,11 @@
-// app/protected-page/page.tsx
 'use client';
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';  // Correct import for app router
 import axios from 'axios';
 import SearchBar from '../components/SearchBar';
 import SortDropdown from '../components/SortDropdown';
-import MyStoreScroller from '../components/my/MyStoreScroller';
+import MyStoreScroller from '../components/my/MyStoreScroller';  // Importing as a default export
 
 type Special = {
   id: number;
@@ -60,7 +60,7 @@ export default function ProtectedPage() {
     special.type.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const specialsByPlace = filteredGroceries.reduce((acc: any, special: Special) => {
+  const specialsByPlace = filteredGroceries.reduce((acc: Record<string, Special[]>, special: Special) => {  // Explicitly typing the accumulator
     const place = special.place;
     if (!acc[place]) {
       acc[place] = [];

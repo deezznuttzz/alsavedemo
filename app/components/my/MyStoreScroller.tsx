@@ -1,38 +1,70 @@
-"use client"
+"use client";
 
-import React from "react";
-import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
+import React, { useEffect, useState } from 'react';
+import MyAlSaveItem from './MyAlSaveItem'; // Adjust the path if necessary
+import FavPlaceButton from './FavPlaceButton';
 
-export const Card = ({
-  rotate,
-  scale,
-  translate,
-  children,
-}: {
-  rotate: MotionValue<number>;
-  scale: MotionValue<number>;
-  translate: MotionValue<number>;
-  children: React.ReactNode;
-}) => {
+interface FavPlaceButtonProps {
+  userId: number;
+  fplacename: string;
+}
+
+interface MyAlSaveItemProps {
+  name: string;       // Special name
+  type: string;
+  place: string;      // Store name
+  foodorgroc: string;
+  from: string;       // <-- Add the `from` property here
+  till: string;
+  before: number;
+  after: number;
+  imagepath: string;
+}
+
+interface MyStoreScrollerProps {
+  place: string;  // Store name
+  specials: MyAlSaveItemProps[];
+}
+
+const MyStoreScroller = ({ place, specials }: MyStoreScrollerProps) => {
+  const [userId, setUserId] = useState<number | null>(null);
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      const parsedUserId = parseInt(storedUserId, 10);
+      if (!isNaN(parsedUserId)) {
+        setUserId(parsedUserId);
+      }
+    }
+  }, []);
+
   return (
-    <motion.div
-      style={{
-        rotateX: rotate,
-        scale,
-        translateY: translate,
-        boxShadow:
-          "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
-      }}
-      className="max-w-[300px] md:max-w-[350px] h-auto mx-auto w-full border-4 border-[#6C6C6C] p-2 md:p-4 bg-[#222222] rounded-[30px] shadow-2xl"
-    >
-      <div className="h-auto w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-zinc-900 p-4 flex flex-col items-center justify-center">
-        <img
-          src="/path-to-image.jpg"
-          alt="example"
-          className="w-full max-h-[150px] object-contain"
-        />
-        {children}
+    <div className="mb-8">
+      <h2 className="text-lg font-bold mb-2">
+        {place}
+        {userId !== null && (
+          <FavPlaceButton userId={userId} fplacename={place} />
+        )}
+      </h2>
+      <div className="flex overflow-x-auto space-x-4 scrollbar-thin scrollbar-thumb-gray-500">
+        {specials.map((special, index) => (
+          <div key={index} className="min-w-[200px] flex-shrink-0">
+            <MyAlSaveItem
+  name={special.name}
+  type={special.type}
+  place={special.place}
+  foodorgroc={special.foodorgroc}
+  till={special.till}  // Removed `from`
+  before={special.before}
+  after={special.after}
+  imagepath={special.imagepath}
+/>
+          </div>
+        ))}
       </div>
-    </motion.div>
+    </div>
   );
 };
+
+export default MyStoreScroller;

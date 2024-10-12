@@ -1,52 +1,43 @@
+// AlSaveItem.tsx
 "use client";
 import React from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image'; // Import Next.js Image component
 
+// Define the props interface for AlSaveItem
 interface AlSaveItemProps {
-  name: string;          
+  name: string;       // Special name
   type: string;
-  // Removed unused props for now; include if necessary
-  before?: number;       
-  after: number;
+  place: string;      // Store name
+  foodorgroc: string;
+  from: string;
   till: string;
-  imagepath?: string;
+  before: number;
+  after: number;
+  imagepath: string;
 }
 
-export default function AlSaveItem({
+const AlSaveItem: React.FC<AlSaveItemProps> = ({
   name,
   type,
+  place,  // Ensure this is accepted as a prop
+  foodorgroc,
+  from,
+  till,
   before,
   after,
-  till,
   imagepath,
-}: AlSaveItemProps) {
+}) => {
   return (
-    <motion.div
-      className="min-w-[200px] bg-purple-200 p-4 rounded-lg shadow-lg"
-      whileHover={{ scale: 1.05, rotate: 3 }}
-      transition={{ type: 'spring', stiffness: 300 }}
-    >
-      {imagepath && (
-        <Image
-          src={imagepath}
-          alt={name}
-          width={200}
-          height={150}
-          className="object-contain rounded-t-lg" // Updated: Maintain aspect ratio
-        />
-      )}
-      <div className="p-2">
-        <h3 className="text-lg font-semibold">{name}</h3>
-        <p className="text-sm text-gray-500">{type}</p>
-        <p className="text-md font-medium">
-          {before !== undefined && before !== after && (
-            <span className="line-through text-gray-400">${before.toFixed(2)} </span>
-          )}
-          ${after.toFixed(2)}
-        </p>
-        <p className="text-sm text-gray-600">Expiry: {till}</p>
-      </div>
-    </motion.div>
+    <div className="card">
+      <img src={imagepath} alt={name} />
+      <h3>{name}</h3>
+      <p>Type: {type}</p>
+      <p>Store: {place}</p> {/* Make sure 'place' is used here */}
+      <p>From: {from}</p>
+      <p>Till: {till}</p>
+      <p>Price before: ${before}</p>
+      <p>Price after: ${after}</p>
+    </div>
   );
-}
+};
+
+export default AlSaveItem;
