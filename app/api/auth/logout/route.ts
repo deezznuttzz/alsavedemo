@@ -1,4 +1,5 @@
-import { prisma } from '@/lib/prisma';
+import { prisma } from '../../../../lib/prisma';
+
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
