@@ -1,4 +1,3 @@
-// app/components/FavFoodButton.tsx
 'use client';
 
 import { useState } from 'react';
@@ -26,10 +25,10 @@ const FavTypeButton: React.FC<FavTypeButtonProps> = ({ userId, ffoodtype }) => {
       });
 
       if (!res.ok) {
-        throw new Error('Failed to add favorite food');
+        throw new Error('Failed to add favorite food type');
       }
 
-      console.log('Favorite food added successfully');
+      console.log('Favorite food type added successfully');
     } catch (error) {
       setError(error instanceof Error ? error.message : 'An error occurred');
     } finally {
@@ -38,13 +37,16 @@ const FavTypeButton: React.FC<FavTypeButtonProps> = ({ userId, ffoodtype }) => {
   };
 
   return (
-    <button
-      onClick={handleAddFavType}
-      className="px-4 py-2 bg-blue-500 text-white rounded"
-      disabled={loading}
-    >
-      {loading ? 'Adding...' : 'Add to Favorites'}
-    </button>
+    <div>
+      <button
+        onClick={handleAddFavType}
+        className="px-4 py-2 bg-blue-500 text-white rounded"
+        disabled={loading}
+      >
+        {loading ? 'Adding...' : 'Add to Favorites'}
+      </button>
+      {error && <p className="text-red-500 mt-2">{error}</p>}
+    </div>
   );
 };
 

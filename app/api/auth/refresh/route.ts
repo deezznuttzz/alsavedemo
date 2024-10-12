@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { verifyRefreshToken, signAccessToken } from '@/lib/auth';
 import { cookies } from 'next/headers';
 
-export async function POST(req: Request) {
+export async function POST() {
   const cookieStore = cookies();
   const refreshToken = cookieStore.get('refreshToken')?.value;
 
@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   try {
     // Decode the refresh token
     const decoded = verifyRefreshToken(refreshToken) as { id: string; email: string };
-    
+
     // Convert the decoded.id from string to number (since Prisma expects an Int)
     const userId = parseInt(decoded.id, 10);  // Convert string to number
 

@@ -1,83 +1,38 @@
-"use client";
+"use client"
 
-import React, { useEffect, useState } from 'react';
-import MyAlSaveItem from './MyAlSaveItem'; // Adjust the path if necessary
-import FavPlaceButton from './FavPlaceButton';
+import React from "react";
+import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
 
-interface FavPlaceButtonProps {
-  userId: number;
-  fplacename: string;
-}
-
-interface FavFoodButtonProps {
-  userId: number;
-  ffoodname: string;
-  fplacename: string;
-  ffoodtype: string;
-}
-
-interface MyAlSaveItem {
-  name: string;       // Special name
-  type: string;
-  place: string;      // Store name
-  foodorgroc: string;
-  from: string;
-  till: string;
-  before: number;
-  after: number;
-  imagepath: string;
-}
-
-interface MyStoreScrollerProps {
-  place: string;  // This is the place (store name) for the header
-  specials: MyAlSaveItem[];
-}
-
-export default function MyStoreScroller({ place, specials }: MyStoreScrollerProps) {
-  const [userId, setUserId] = useState<number | null>(null);
-
-  useEffect(() => {
-    const storedUserId = localStorage.getItem('userId');
-    if (storedUserId) {
-      const parsedUserId = parseInt(storedUserId, 10);
-      if (!isNaN(parsedUserId)) {
-        setUserId(parsedUserId);
-      }
-    }
-  }, []);
-
+export const Card = ({
+  rotate,
+  scale,
+  translate,
+  children,
+}: {
+  rotate: MotionValue<number>;
+  scale: MotionValue<number>;
+  translate: MotionValue<number>;
+  children: React.ReactNode;
+}) => {
   return (
-    <div className="mb-8">
-      <h2 className="text-lg font-bold mb-2">
-        {place}
-        {userId !== null && (
-          <FavPlaceButton
-            userId={userId}
-            fplacename={place} // Assuming you want to pass the place name here
-          />
-        )}
-      </h2> {/* Place name in the header */}
-      <div className="flex overflow-x-auto space-x-4 scrollbar-thin scrollbar-thumb-gray-500">
-        {specials.map((special, index) => (
-          <div
-            key={index}
-            className="min-w-[200px] flex-shrink-0" // Prevents flex items from stretching
-          >
-            <MyAlSaveItem
-              name={special.name} // Special name in the card
-              type={special.type}
-              placename={special.name}
-              foodorgroc={special.foodorgroc}
-              from={special.from}
-              till={special.till}
-              place={special.place} // Store name passed but not displayed on the card
-              before={special.before}
-              after={special.after}
-              imagepath={special.imagepath}
-            />
-          </div>
-        ))}
+    <motion.div
+      style={{
+        rotateX: rotate,
+        scale,
+        translateY: translate,
+        boxShadow:
+          "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
+      }}
+      className="max-w-[300px] md:max-w-[350px] h-auto mx-auto w-full border-4 border-[#6C6C6C] p-2 md:p-4 bg-[#222222] rounded-[30px] shadow-2xl"
+    >
+      <div className="h-auto w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-zinc-900 p-4 flex flex-col items-center justify-center">
+        <img
+          src="/path-to-image.jpg"
+          alt="example"
+          className="w-full max-h-[150px] object-contain"
+        />
+        {children}
       </div>
-    </div>
+    </motion.div>
   );
-}
+};

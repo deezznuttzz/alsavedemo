@@ -1,4 +1,3 @@
-// app/components/FavFoodButton.tsx
 'use client';
 
 import { useState } from 'react';
@@ -40,13 +39,16 @@ const FavFoodButton: React.FC<FavFoodButtonProps> = ({ userId, ffoodname, fplace
   };
 
   return (
-    <button
-      onClick={handleAddFavFood}
-      className="px-4 py-2 bg-blue-500 text-white rounded"
-      disabled={loading}
-    >
-      {loading ? 'Adding...' : 'Add to Favorites'}
-    </button>
+    <div>
+      <button
+        onClick={handleAddFavFood}
+        className="px-4 py-2 bg-blue-500 text-white rounded"
+        disabled={loading}
+      >
+        {loading ? 'Adding...' : 'Add to Favorites'}
+      </button>
+      {error && <p className="text-red-500 mt-2">{error}</p>}
+    </div>
   );
 };
 

@@ -1,16 +1,14 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image'; // Import Next.js Image component
 
 interface AlSaveItemProps {
-  name: string;          // Special name
+  name: string;          
   type: string;
-  place: string;
-  placename: string;
-  foodorgroc: string;
-  before?: number;       // Optional in case some items don't have a priceBefore
+  // Removed unused props for now; include if necessary
+  before?: number;       
   after: number;
-  from: string;
   till: string;
   imagepath?: string;
 }
@@ -18,12 +16,9 @@ interface AlSaveItemProps {
 export default function AlSaveItem({
   name,
   type,
-  place,
-  placename,
   before,
   after,
   till,
-  from,
   imagepath,
 }: AlSaveItemProps) {
   return (
@@ -33,14 +28,16 @@ export default function AlSaveItem({
       transition={{ type: 'spring', stiffness: 300 }}
     >
       {imagepath && (
-        <img
+        <Image
           src={imagepath}
           alt={name}
-          className="w-200 max-h-[150px] object-contain rounded-t-lg" // Updated: Maintain aspect ratio
+          width={200}
+          height={150}
+          className="object-contain rounded-t-lg" // Updated: Maintain aspect ratio
         />
       )}
       <div className="p-2">
-        <h3 className="text-lg font-semibold">{name}</h3> {/* Special name in the card */}
+        <h3 className="text-lg font-semibold">{name}</h3>
         <p className="text-sm text-gray-500">{type}</p>
         <p className="text-md font-medium">
           {before !== undefined && before !== after && (

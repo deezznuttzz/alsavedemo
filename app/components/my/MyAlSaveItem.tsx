@@ -1,23 +1,9 @@
 "use client";
+
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import FavFoodButton from './FavFoodButton';
 import FavTypeButton from './FavTypeButton';
-
-
-
-
-interface FavTypeButtonProps {
-  userId: number;
-  ffoodtype: string;
-}
-
-interface FavFoodButtonProps {
-  userId: number;
-  ffoodname: string;
-  fplacename: string;
-  ffoodtype: string;
-}
 
 interface MyAlSaveItemProps {
   name: string;
@@ -25,7 +11,7 @@ interface MyAlSaveItemProps {
   place: string;
   placename: string;
   foodorgroc: string;
-  before?: number;       
+  before?: number;
   after: number;
   from: string;
   till: string;
@@ -65,7 +51,7 @@ export default function MyAlSaveItem({
         <img
           src={imagepath}
           alt={name}
-          className="w-200 max-h-[150px] object-contain rounded-t-lg" 
+          className="w-200 max-h-[150px] object-contain rounded-t-lg"
         />
       )}
       <div className="p-2">
@@ -83,17 +69,13 @@ export default function MyAlSaveItem({
         <p className="text-sm text-gray-500">
           {type}
           {userId !== null && (
-           <FavTypeButton
-           userId={userId}
-           ffoodtype={type}
-         />
+            <FavTypeButton userId={userId} ffoodtype={type} />
           )}
-          
         </p>
         <p className="text-md font-medium">
           {before !== undefined && before !== after && (
             <span className="line-through text-gray-400">
-              ${before.toFixed(2)} 
+              ${before.toFixed(2)}
             </span>
           )}
           ${after.toFixed(2)}

@@ -39,7 +39,7 @@ export default function ViewSpecials() {
       .catch((error) => console.error(error));
   }, []);
 
-  const specialsByPlace = filteredGroceries.reduce((acc: any, special: Special) => {
+  const specialsByPlace = filteredGroceries.reduce((acc: { [place: string]: Special[] }, special: Special) => {
     const place = special.place;
     if (!acc[place]) {
       acc[place] = [];
@@ -83,4 +83,5 @@ export default function ViewSpecials() {
         <StoreScroller key={place} place={place} specials={specialsByPlace[place]} />
       ))}
     </div>
-  );}
+  );
+}
