@@ -7,6 +7,10 @@ const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
   try {
+    // Check the database connection
+    await prisma.$connect();
+    console.log('Database connected');
+
     const formData = await request.formData();
     const placeName = formData.get('placeName')?.toString();
     const location = formData.get('location')?.toString();
