@@ -1,6 +1,6 @@
 // app/api/subscribe/route.ts
 import { NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import {prisma} from '@/lib/prisma';
 
 export async function POST(req: Request) {
   const { subscription, userId } = await req.json(); // Extract userId and subscription from the request body
