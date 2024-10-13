@@ -1,16 +1,17 @@
 'use client';
+
 import { useEffect } from 'react';
-import './globals.css'
+import './globals.css'; // Ensure it's correctly referenced
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
         .register('/service-worker.js')
-        .then(function (registration) {
+        .then((registration) => {
           console.log('Service Worker registered with scope:', registration.scope);
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.error('Service Worker registration failed:', error);
         });
     }
@@ -18,7 +19,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="min-h-screen bg-background text-foreground">
+        {children}
+      </body>
     </html>
   );
 }
