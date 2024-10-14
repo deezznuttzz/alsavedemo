@@ -2,12 +2,12 @@
 generator client {
   provider = "prisma-client-js"
   output   = "./generated/client"
-  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = "postgresql://userdatabase_owner:UOdsD0H2wnIB@ep-curly-star-a5eu5l03.us-east-2.aws.neon.tech/userdatabase"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 
